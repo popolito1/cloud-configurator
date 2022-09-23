@@ -9,29 +9,33 @@ def get_soup(url: str):
         soup = BeautifulSoup(r.text,'html.parser')
         return soup
 
-def get_data(soup: BeautifulSoup):
+def get_data_compat(soup, *compats):
     table = soup.find("table", id="product-parameters")
     tr_list = table.find_all("tr")
     features = table.find_all("tr", class_="feature")
     for feature in features:
-        if feature_name(feature) == "Architecture":
-            data = data_of_feature(feature, tr_list, features)
-            for line in data:
-                if tr_label(line) == "Compatibilité chipset carte mère":
-                    trs = data_of_label(line, data)
-                    for tr in trs:
-                        print(data_of_tr(tr))
-                    break
-        if feature_name(feature) == "Contrôleur mémoire":
-            data = data_of_feature(feature, tr_list, features)
-            for line in data:
-                if tr_label(line) == "Contrôleur mémoire":
-                    trs = data_of_label(line, data)
-                    for tr in trs:
-                        print(data_of_tr(tr))
-                    break
+        for compat in compats:
+            get_data(feature, *compat, tr_list, features)
 
 
+def get_data_compat_ram(soup: BeautifulSoup):
+    table = soup.find("table", id="product-parameters")
+    tr_list = table.find_all("tr")
+    features = table.find_all("tr", class_="feature")
+    for feature in features:
+        get_data(feature, "Format Mémoire", "Type de mémoire", tr_list, features)
+
+def get_data(feature: NavigableString, featureName: str, labelName: str, tr_list: list, features: list):
+    if feature_name(feature) == featureName:
+        data = data_of_feature(feature, tr_list, features)
+        for line in data:
+            if tr_label(line) == labelName:
+                trs = data_of_label(line, data)
+                list_data = []
+                for tr in trs:
+                    list_data.append(data_of_tr(tr))
+                print(list_data)
+                break
 
 def feature_name(feature: NavigableString):
     #return the name of the feature
@@ -83,4 +87,4 @@ if __name__ == "__main__":
     fileName = "processeurs"
     data = open_with_json(f"processed_data/{fileName}_cleaned.json")
     soup = get_soup(data[0]['url'])
-    get_data(soup)
+    get_data_compat(soup,("Architecture", "Compatibilité chipset carte mère"),("Contrôleur mémoire", "Contrôleur mémoire"))
