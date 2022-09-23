@@ -1,4 +1,4 @@
-import os
+import os, json
 
 def open_with_json(path):
     if os.path.exists(path):
