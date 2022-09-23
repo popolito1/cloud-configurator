@@ -1,16 +1,5 @@
-from cgi import print_exception
-from email.mime import image
-import json, os
-from locale import currency
-from unicodedata import name
-
-def open_with_json(path):
-    if os.path.exists(path):
-        with open(path,'r', encoding="utf8") as file:
-            data = json.load(file)
-    else:
-        data = {}
-    return data
+from utils import open_with_json
+import json
 
 def item_data(item):
     new = {}
