@@ -18,13 +18,6 @@ def get_data_compat(soup, *compats):
             get_data(feature, *compat, tr_list, features)
 
 
-def get_data_compat_ram(soup: BeautifulSoup):
-    table = soup.find("table", id="product-parameters")
-    tr_list = table.find_all("tr")
-    features = table.find_all("tr", class_="feature")
-    for feature in features:
-        get_data(feature, "Format Mémoire", "Type de mémoire", tr_list, features)
-
 def get_data(feature: NavigableString, featureName: str, labelName: str, tr_list: list, features: list):
     if feature_name(feature) == featureName:
         data = data_of_feature(feature, tr_list, features)
@@ -33,7 +26,10 @@ def get_data(feature: NavigableString, featureName: str, labelName: str, tr_list
                 trs = data_of_label(line, data)
                 list_data = []
                 for tr in trs:
-                    list_data.append(data_of_tr(tr))
+                    if tr != '\n':
+                        temp = data_of_tr(tr)
+                        if not temp is None:
+                            list_data.append(temp)
                 print(list_data)
                 break
 
@@ -47,7 +43,10 @@ def data_of_feature(feature: NavigableString, tr_list: list, features: list):
     #return the list of <tr> belonging to the feature in the fiche technique
     index = tr_list.index(feature)
     feature_index = features.index(feature)
-    next_index = tr_list.index(features[feature_index+1])
+    if feature_index+1 < len(features):
+        next_index = tr_list.index(features[feature_index+1])
+    else:
+        next_index = -1
     data = tr_list[index:next_index]
     return data
 
@@ -65,7 +64,7 @@ def data_of_label(label: NavigableString, tr_list: list):
     index = tr_list.index(label)
     if index == len(tr_list)-1:
         #the label is the last and so has only itself as elements
-        return tr_list[index]
+        return [tr_list[index]]
 
     for i,tr in enumerate(tr_list[index+1:]):
         if tr_label(tr):
@@ -80,11 +79,44 @@ def data_of_label(label: NavigableString, tr_list: list):
 
 def data_of_tr(tr: NavigableString):
     td = tr.find("td", class_="checkbox")
-    a = td.find("a")
-    return a.contents[0].strip()
+    if not td is None:
+        a = td.find("a")
+        return a.contents[0].strip()
+    return None
+
+def get_data_compat_ram():
+    data = open_with_json(f"processed_data/ram_cleaned.json")
+    soup = get_soup(data[0]['url'])
+    get_data_compat(soup, ("Format Mémoire", "Type de mémoire"))
+
+def get_data_compat_processeurs():
+    data = open_with_json(f"processed_data/processeurs_cleaned.json")
+    soup = get_soup(data[0]['url'])
+    get_data_compat(soup,
+    ("Architecture", "Compatibilité chipset carte mère"),
+    ("Contrôleur mémoire", "Contrôleur mémoire"),
+    ("Architecture", "TDP")
+    )
+
+def get_data_compat_motherboards():
+    data = open_with_json(f"processed_data/motherboards_cleaned.json")
+    soup = get_soup(data[0]['url'])
+    get_data_compat(soup, 
+        ("Chipset", "Chipset"),
+        ("Caractéristiques physiques", "Format de carte mère")
+    )
+
+def get_data_compat_graphic_cards():
+    data = open_with_json(f"processed_data/graphic_cards_cleaned.json")
+    soup = get_soup(data[0]['url'])
+    get_data_compat(soup, ("Design", "Consommation"))
+
+def get_data_compat_psu():
+    data = open_with_json(f"processed_data/psu_cleaned.json")
+    soup = get_soup(data[0]['url'])
+    get_data_compat(soup, ("Puissance et Rendement", "Puissance"))
 
 if __name__ == "__main__":
-    fileName = "processeurs"
-    data = open_with_json(f"processed_data/{fileName}_cleaned.json")
-    soup = get_soup(data[0]['url'])
-    get_data_compat(soup,("Architecture", "Compatibilité chipset carte mère"),("Contrôleur mémoire", "Contrôleur mémoire"))
+    get_data_compat_psu()
+    
+    
