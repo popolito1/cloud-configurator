@@ -5,4 +5,5 @@ import { store, key } from './store'
 
 const app = createApp(App)
 app.use(router)
-.mount('#app')
+    .use(store, key)
+    .mount('#app')
