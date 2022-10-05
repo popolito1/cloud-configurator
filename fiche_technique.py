@@ -1,4 +1,5 @@
-from utils import open_with_json
+import time
+from utils import open_with_json, save_with_json
 import requests
 from bs4 import BeautifulSoup, NavigableString
 
@@ -81,7 +82,8 @@ def data_of_tr(tr: NavigableString):
     td = tr.find("td", class_="checkbox")
     if not td is None:
         a = td.find("a")
-        return a.contents[0].strip()
+        if not a is None:
+            return a.contents[0].strip()
     return None
 
 def get_data_compat_ram():
@@ -116,7 +118,59 @@ def get_data_compat_psu():
     soup = get_soup(data[0]['url'])
     get_data_compat(soup, ("Puissance et Rendement", "Puissance"))
 
+def get_fiche(soup: BeautifulSoup):
+    table = soup.find("table", id="product-parameters")
+    tr_list = table.find_all("tr")
+    features = table.find_all("tr", class_="feature")
+    out = {}
+    for feature in features:
+        labels = data_of_feature(feature, tr_list, features)
+        label_dict = {}
+        for label in labels:
+            trs = data_of_label(label,tr_list)
+            tr_data = [data_of_tr(tr) for tr in trs]
+            if None in tr_data:
+                continue
+            tr_data = clean_data(tr_data)
+            label_dict[tr_label(label)] = tr_data if len(tr_data) > 1 else tr_data[0]
+        out[feature_name(feature)] = label_dict
+    return out
+
+def get_description(soup: BeautifulSoup):
+    p = soup.find_all('p', class_="desc")[0]
+    return p.contents[0]
+
+def clean_data(data: list):
+    out = []
+    for el in data:
+        if type(el) is str:
+            temp = el.split(' ')
+            new = [e for e in temp if e]
+            cleaned = ' '.join(new)
+            out.append(cleaned)
+        else:
+            out.append(el)
+    return out
+
+
+
 if __name__ == "__main__":
-    get_data_compat_psu()
+    import os
+    list = os.listdir("processed_data/")
+    for name in list:
+        if not name in os.listdir("fiche_techniques/"):
+            print(name)
+            data = open_with_json(f"processed_data/{name}")
+            new = []
+            for i,el in enumerate(data):
+                print(i)
+                url = data[0]['url']
+                soup = get_soup(url)
+                desc = get_description(soup)
+                out = get_fiche(soup)
+                el['description'] = desc
+                el['fiche'] = out
+                new.append(el)
+                save_with_json(new, f"fiche_techniques/{name}")
     
     

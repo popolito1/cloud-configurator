@@ -7,3 +7,7 @@ def open_with_json(path):
     else:
         data = {}
     return data
+
+def save_with_json(data, path):
+    with open(path,'w', encoding="utf8") as file:
+        json.dump(data, file)
