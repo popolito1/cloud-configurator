@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <button @click="getProduct">Product</button>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -31,12 +32,24 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useStore } from '../store'
 
 export default defineComponent({
   name: 'HelloWorld',
   props: {
     msg: String,
   },
+  data(){
+    return {
+      store: useStore()
+    }
+  },
+  methods:{
+    async getProduct(){
+      let product = await this.store.dispatch("getProduct",{category:'processeurs', urlId:"PB00493654"})
+      console.log(product);
+    }
+  }
 });
 </script>
 
