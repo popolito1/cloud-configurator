@@ -1,6 +1,64 @@
 <template>
     <div class="container">
         <button @click="simulateCart">Simulate cart</button>
+        <table>
+            <tr>
+                <td><div class="logotype">Logo</div></td>
+                <td><div>Bill</div></td>
+                <td></td>
+            </tr>
+        </table> 
+        <br><br>
+        <h3>Your contact details</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p><br>
+        <table>
+            <tr>
+                <td>
+                    <strong>Date:</strong> 2022-10-09<br>
+                    <strong>Type:</strong> Configurator summary<br>
+                </td>
+                <td>
+                    <strong>E-mail:</strong> firstname@company.com<br>
+                    <strong>Phone:</strong> 03 20 14 04 15<br>
+                </td>
+            </tr>
+        </table><br>
+        <div class="shoppingIcon"></div> 
+        <h3>Your articles</h3>
+        <table>
+            <tr>
+                <td width="40%" class="column-header">Image</td>
+                <td width="20%" class="column-header">Article</td>
+                <td width="20%" class="column-header">Details</td>
+                <td width="20%" class="column-header">Price</td>
+            </tr>
+            <tr>
+                <td class="row">Image 1</td>
+                <td class="row">Nom 1</td>
+                <td class="row">Nom étendu 1</td>
+                <td class="row">Prix 1</td>
+            </tr>
+            <tr>
+                <td class="row">Image 2</td>
+                <td class="row">Nom 2</td>
+                <td class="row">Nom étendu 2</td>
+                <td class="row">Prix 2</td>
+            </tr>     
+            </table><br>
+            <table width="100%" style="background:#eee;padding:20px;">
+            <tr>
+                <td>
+                <table width="300px" style="float:right">
+                    <tr>
+                        <td><strong>Total:</strong></td>    
+                        <td style="text-align:right">Prix1+Prix2</td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        </table>
+        <div class="alert">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.	</div>
+        <div class="socialmedia">Follow us online <small>[FB] [INSTA]</small></div>
     </div>
 </template>
   
