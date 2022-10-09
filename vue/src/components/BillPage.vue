@@ -14,7 +14,7 @@
         <table>
             <tr>
                 <td>
-                    <strong>Date:</strong> 2022-10-09<br>
+                    <strong>Date:</strong> {{date}}<br>
                     <strong>Type:</strong> Configurator summary<br>
                 </td>
                 <td>
@@ -73,7 +73,12 @@
             return {
                 store: useStore(),
                 cart: new Array<Product>(),
+                date: ''
             }
+        },
+        created() {
+            const today = new Date();
+            this.date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         },
         methods:{
             async getCart(){
