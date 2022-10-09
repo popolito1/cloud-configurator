@@ -32,26 +32,21 @@
                 <td width="20%" class="column-header">Details</td>
                 <td width="20%" class="column-header">Price</td>
             </tr>
-            <tr>
-                <td class="row">Image 1</td>
-                <td class="row">Nom 1</td>
-                <td class="row">Nom étendu 1</td>
-                <td class="row">Prix 1</td>
+
+            <tr v-for="article in cart" :key="article.urlId">
+                <td class="row"><img class="fit-picture" :src="article.image"></td>
+                <td class="row">{{article.name}}</td>
+                <td class="row">{{article.extendedName}}</td>
+                <td class="row">{{article.price}}  {{article.currency}}</td>
             </tr>
-            <tr>
-                <td class="row">Image 2</td>
-                <td class="row">Nom 2</td>
-                <td class="row">Nom étendu 2</td>
-                <td class="row">Prix 2</td>
-            </tr>     
-            </table><br>
-            <table width="100%" style="background:#eee;padding:20px;">
+        </table><br>
+        <table width="100%" style="background:#eee;padding:20px;">
             <tr>
                 <td>
                 <table width="300px" style="float:right">
                     <tr>
                         <td><strong>Total:</strong></td>    
-                        <td style="text-align:right">Prix1+Prix2</td>
+                        <td style="text-align:right">{{totalPrice}} EUR</td>
                     </tr>
                 </table>
                 </td>
@@ -93,6 +88,15 @@
             async simulateCart(){
                 await this.getCart();
                 console.log(this.cart)
+            }
+        },
+        computed: {
+            totalPrice: function() {
+                let price = 0;
+                this.cart.forEach(element => {
+                    price += element.price
+                });
+                return price
             }
         }
     });
