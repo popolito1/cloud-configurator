@@ -4,43 +4,57 @@
           <div class="title">
             <ul id="titles">
               <li>
-                <h1>{{ name}}</h1>
+                <h1>{{product.name}}</h1>
               </li>
               <li>
-                <p2>{{extendedName}}</p2>
+                <p2>{{product.extendedName}}</p2>
               </li>
             </ul>
           </div>
         <div class="container">
   <!--         <img src={{image}}/> -->
-          <img src="https://media.ldlc.com/r374/ld/products/00/05/90/02/LD0005900230_1.jpg" />
-          <p class="description">{{description}}</p>
+          <img :src="product.image" />
+          <p class="description">{{product.description}}</p>
           <div class="price">
-            <p1>{{price}}</p1>
+            <p1>{{product.price}} {{product.currency}}</p1>
           </div>
         </div>
         
       </div>
       
   </div>
-
+  
   <div class="dataSheet">
     <h1> Fiche Technique</h1>
+  <div>
+    <p>{{product.fiche}}</p>
+  </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useStore, Product } from '../store'
 
 export default defineComponent({
   name: 'ContainerProduct',
-  props: {
-    name: String,
-    extendedName : String,
-    description : String,
-    image : String,
-    price : String
+  data(){
+    return {
+      store: useStore(),
+      product: {} as Product
+    }
   },
+  methods:{
+    getProduct(){
+      this.store.dispatch("getProduct",{category:'processeurs', urlId:"PB00493654"})
+        .then(data => this.product = data)
+    }
+
+  },
+  mounted(){
+    this.getProduct();
+  }
+  
 });
 </script>
 
