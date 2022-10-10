@@ -1,6 +1,5 @@
 <template>
     <div class="container">
-        <button @click="simulateCart">Simulate cart</button>
         <table>
             <tr>
                 <td><div class="logotype">Logo</div></td>
@@ -33,7 +32,7 @@
                 <td width="20%" class="column-header">Price</td>
             </tr>
 
-            <tr v-for="article in cart" :key="article.urlId">
+            <tr v-for="article in basket" :key="article.urlId">
                 <td class="row"><img class="fit-picture" :src="article.image"></td>
                 <td class="row">{{article.name}}</td>
                 <td class="row">{{article.extendedName}}</td>
@@ -59,15 +58,14 @@
   
 <script lang="ts">
     import { defineComponent } from 'vue';
-    import { useStore } from '../store';
-    import { Product } from '../store';
+    import { useStore, Product } from '../store';
 
     export default defineComponent({
         name: 'BillPage',
         data(){
             return {
                 store: useStore(),
-                cart: new Array<Product>(),
+                basket: new Array<Product>(),
                 date: ''
             }
         },
@@ -75,25 +73,22 @@
             const today = new Date();
             this.date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         },
+        mounted(){
+            this.getBasket();
+        },
         methods:{
-            async getCart(){
+            async getBasket(){
                 let array = [{urlId: "PB00340585", category:"aio_coolers"},{urlId: "PB00505045", category: "graphic_cards"},{urlId: "PB00346166", category: "motherboards"},{urlId: "PB00493654", category: "processeurs"},{urlId: "PB00400847", category: "psu"},{urlId: "PB00271616", category: "ram"}]
-                let cart = new Array<Product>();
                 for (const element of array) {
                     let product = await this.store.dispatch("getProduct",element)
-                    cart.push(product)
+                    this.basket.push(product)
                 }
-                this.cart = cart
-            },
-            async simulateCart(){
-                await this.getCart();
-                console.log(this.cart)
             }
         },
         computed: {
             totalPrice: function() {
                 let price = 0;
-                this.cart.forEach(element => {
+                this.basket.forEach(element => {
                     price += element.price
                 });
                 return price

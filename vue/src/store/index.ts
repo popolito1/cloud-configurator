@@ -8,7 +8,7 @@ export interface State {
   basket: Array<Product>
 }
 
-interface Product {
+export interface Product {
   name: string,
   image: string,
   price: number,
