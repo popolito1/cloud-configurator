@@ -21,6 +21,7 @@ interface Product {
     urlId: string,
     url: string,
     description: string,
+    category: string,
     fiche: Object
 }
 
