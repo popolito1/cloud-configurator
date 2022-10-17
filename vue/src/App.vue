@@ -1,16 +1,12 @@
 <template>
-  <ContainerProduct />
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-import ContainerProduct from './components/ContainerProduct.vue';
-
+  
 export default defineComponent({
-  name: 'App',
-  components: {
-    ContainerProduct
-  }
+  name: 'App'
 });
 </script>
 
