@@ -4,7 +4,7 @@
         <div class="categories">
             <p>{{product.name}}</p>
             <p id="price">{{product.price}} {{product.currency}}</p>
-            <ConfiguratorElementButton color="delete"> 
+            <ConfiguratorElementButton @click=deleteProduct() color="delete"> 
                 <font-awesome-icon :icon="['fas','trash']"/>
             </ConfiguratorElementButton>
         </div>
@@ -15,6 +15,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import ConfiguratorElementButton from './ConfiguratorElementButton.vue';
+    import { useStore } from '../store'
 
     export default defineComponent({
     name: 'SummaryElement',
@@ -26,6 +27,11 @@
             type: Object,
             default: null
         },
+    },
+    data(){
+        return{
+            store: useStore()
+        }
     },
     computed:{
         getCategory(){
@@ -49,6 +55,11 @@
             }else{
                 return ""
             }
+        }
+    },
+    methods:{
+        deleteProduct(){
+            this.store.commit('deleteProduct',this.product)
         }
     }
     });
