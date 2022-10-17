@@ -8,7 +8,7 @@
         </div>
         <div>
             <p id="price">Total : {{getTotalPrice}} €</p>
-            <button class="buttons" >Vider</button>
+            <button class="buttons" @click=deleteAllProduct() >Vider</button>
             <button class="buttons">Valider</button>
         </div>
     </div>
@@ -17,9 +17,15 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import SummaryElement from './SummaryElement.vue'
+    import { useStore } from '../store'
 
     export default defineComponent({
     name: 'SummaryComponent',
+    data(){
+        return{
+            store: useStore()
+        }
+    },
     components : {
         SummaryElement
     },
@@ -36,6 +42,11 @@
                 sum = sum + this.basket[i].price;
             }
             return sum;
+        }
+    },
+    methods:{
+        deleteAllProduct(){
+            this.store.commit('deleteAllProduct');
         }
     }
     });
