@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import ConfiguratorPage from '../components/ConfiguratorPage.vue'
 import ConfiguratorChoicePage from '../components/ConfiguratorChoicePage.vue'
+import ContainerProduct from '../components/ContainerProduct.vue'
+import BillPage from '../components/BillPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   /*{
@@ -18,22 +20,22 @@ const routes: Array<RouteRecordRaw> = [
     name: "configuratorChoice",
     component: ConfiguratorChoicePage,
   },
-  /*{
+  {
     path: '/product/:productId',
     name: "productPage",
     component: ContainerProduct
   },
-  {
+  /*{
     path: '/products',
     name: "productList",
     component: PageProducts
-  },
+  },*/
   {
     path: '/bill',
     name: "BillPage",
     component: BillPage
   },
-  {
+  /*{
     path: '/:catchAll(.*)*',
     name: 'NotFound',
     component: NotFound
