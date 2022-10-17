@@ -1,7 +1,7 @@
 <template>
     <div class="Bigcontainer">
-        <ConfiguratorComponent :basket="basket"></ConfiguratorComponent>
-        <SummaryComponent :basket="basket"></SummaryComponent>
+        <ConfiguratorComponent :basket="getBasket"></ConfiguratorComponent>
+        <SummaryComponent :basket="getBasket"></SummaryComponent>
     </div>
 </template>
   
@@ -9,7 +9,7 @@
     import { defineComponent } from 'vue';
     import ConfiguratorComponent from './ConfiguratorComponent.vue';
     import SummaryComponent from './SummaryComponent.vue';
-    import { useStore, Product } from '../store'
+    import { useStore , Product} from '../store'
 
     export default defineComponent({
     name: 'ConfiguratorPage',
@@ -19,20 +19,12 @@
     },
     data(){
         return{
-            store: useStore(),
-            basket: new Array<Product>()
+            store: useStore()
         }
     },
-    mounted(){
-        this.getBasket();
-    },
-    methods:{
-        async getBasket(){
-            let array = [{urlId: "PB00505045", category: "graphic_cards"},{urlId: "PB00346166", category: "motherboards"},{urlId: "PB00493654", category: "processeurs"},{urlId: "PB00400847", category: "psu"},{urlId: "PB00271616", category: "ram"}]
-            for (const element of array) {
-                let product = await this.store.dispatch("getProduct",element)
-                this.basket.push(product)
-            }
+    computed:{
+        getBasket(): Array<Product>{
+            return this.store.getters["getBasket"];
         }
     }
     });
