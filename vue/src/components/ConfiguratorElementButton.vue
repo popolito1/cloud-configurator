@@ -50,6 +50,7 @@
 .button:hover{
     background-color: var(--button-hover-background-color);
     color: white;
+    cursor: pointer;
 }
 
 </style>
