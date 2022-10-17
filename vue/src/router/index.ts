@@ -14,9 +14,9 @@ const routes: Array<RouteRecordRaw> = [
     component: ConfiguratorPage
   },
   {
-    path: '/configurator/:category',
+    path: '/configurator/:category/:type',
     name: "configuratorChoice",
-    component: ConfiguratorChoicePage
+    component: ConfiguratorChoicePage,
   },
   /*{
     path: '/product/:productId',
