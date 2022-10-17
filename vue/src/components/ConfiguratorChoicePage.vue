@@ -22,12 +22,13 @@
                         </strong>
                     </td>
                     <td>
-                        <input type="radio" name="choice" v-model="urlId" v-bind:value="product.urlId"/>
+                        <input type="radio" name="choice" v-model="choosenProduct" v-bind:value="product"/>
                     </td>
                 </tr>
             </table>
         </div>
-        <button @click="test" class="myButton" >Valider</button>
+        <button @click="validateChoice" class="myButton" >Valider</button>
+        <button @click="returnToConfigurator" class="myButton" >Retour</button>
     </div>
 </template>
   
@@ -43,13 +44,26 @@
         ram: "Mémoire vive",
         cases: "Boitiers"
     }
+
+    const categorySingleNames = {
+        processeurs: "processeur",
+        aio_coolers: "aio_cooler",
+        graphic_cards: "graphic_card",
+        motherboards: "motherboard",
+        psu: "psu",
+        ram: "ram",
+        cases: "case"
+    }
     export default defineComponent({
     name: 'ConfiguratorChoicePage',
     data(){
         return{
             store: useStore(),
             products: new Array<Product>(),
-            urlId: '',
+            choosenProduct: {
+                type: Object,
+                default: null
+            },
             searchQuery:''
         }
     },
@@ -60,10 +74,19 @@
         async getProducts(){
             this.products = await this.store.dispatch("getProducts",this.$route.params.category)
         },
-        test(){
-            alert(this.urlId)
+        validateChoice(){
+            if(this.$route.params.type=="edit"){ //edit
+                let product = this.store.getters["getBasket"].filter((el: Product) => el.category == categorySingleNames[this.$route.params.category as keyof typeof categorySingleNames])
+                console.log(product[0])
+                this.store.commit("deleteProduct", product[0])
+            }
+            this.store.commit("addProduct", this.choosenProduct)
+            this.$router.push("/configurator")
+        },
+        returnToConfigurator(){
             this.$router.push("/configurator")
         }
+        
     },
     computed:{
         getCategoryName(){
