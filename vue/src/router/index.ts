@@ -4,13 +4,14 @@ import ConfiguratorChoicePage from '../components/ConfiguratorChoicePage.vue'
 import ContainerProduct from '../components/ContainerProduct.vue'
 import BillPage from '../components/BillPage.vue'
 import NotFound from '../components/NotFound.vue'
+import HomePage from '../components/HomePage.vue'
 
 const routes: Array<RouteRecordRaw> = [
-  /*{
+  {
     path: '/',
     name: "HomePage",
     component: HomePage
-  },*/
+  },
   {
     path: '/configurator',
     name: "configurator",
