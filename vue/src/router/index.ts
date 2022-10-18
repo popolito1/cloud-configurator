@@ -3,6 +3,7 @@ import ConfiguratorPage from '../components/ConfiguratorPage.vue'
 import ConfiguratorChoicePage from '../components/ConfiguratorChoicePage.vue'
 import ContainerProduct from '../components/ContainerProduct.vue'
 import BillPage from '../components/BillPage.vue'
+import NotFound from '../components/NotFound.vue'
 
 const routes: Array<RouteRecordRaw> = [
   /*{
@@ -35,11 +36,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "BillPage",
     component: BillPage
   },
-  /*{
+  {
     path: '/:catchAll(.*)*',
     name: 'NotFound',
     component: NotFound
-  }*/
+  }
 ]
 
 const router = createRouter({
