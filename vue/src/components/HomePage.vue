@@ -1,5 +1,5 @@
 <template>
-    <div class="app">
+    <div class>
         <nav class="navigation">
             <ul>
                 <li class="elementNav">
@@ -92,7 +92,7 @@
 </script>
 
 
-<style>
+<style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
@@ -110,7 +110,6 @@ nav.navigation ul li.elementNav{
     text-shadow: 2px 2px 4px #000000;
 
 }
-
 
 
 nav.navigation ul li.elementNavv{
