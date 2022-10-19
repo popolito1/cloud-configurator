@@ -133,7 +133,7 @@ img{
 
 .containerTable{
     overflow-y: scroll;
-    max-height: 650px;
+    max-height: 600px;
     width: 85%;
 
 }
