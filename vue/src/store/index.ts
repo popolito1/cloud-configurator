@@ -1,4 +1,3 @@
-// store.ts
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 
@@ -8,7 +7,7 @@ export interface State {
   basket: Array<Product>
 }
 
-interface Product {
+export interface Product {
   name: string,
   image: string,
   price: number,
@@ -17,6 +16,7 @@ interface Product {
   urlId: string,
   url: string,
   description: string,
+  category: string
   fiche: Object
 }
 
@@ -34,13 +34,11 @@ export const store = createStore<State>({
     }
   },
   actions: {
-    async getProducts({commit, state}, category: string) {
+    async getProducts({commit, state}, params:{category: string}) {
       const res: Response = await fetch("http://localhost:8081/API/products",{
         method:"POST",
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          "category": category
-        })        
+        body: JSON.stringify({"category": params.category})        
       })
       const products: Array<Product> = await res.json();
       return products
@@ -57,6 +55,18 @@ export const store = createStore<State>({
       const product: Product = await res.json();
       return product;
     }
+  },
+  mutations:{
+      addProduct(state, product){
+        state.basket.push(product);
+      },
+      deleteProduct(state, product){
+        state.basket=state.basket.filter((el: Product) => el.urlId != product.urlId);
+        console.log(state.basket)
+      },
+      deleteAllProduct (state){
+        state.basket=[];
+      }
   }
 })
 
