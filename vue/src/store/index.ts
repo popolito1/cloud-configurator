@@ -8,7 +8,7 @@ export interface State {
   basket: Array<Product>
 }
 
-interface Product {
+export interface Product {
   name: string,
   image: string,
   price: number,
@@ -17,6 +17,7 @@ interface Product {
   urlId: string,
   url: string,
   description: string,
+  category: string
   fiche: Object
 }
 
@@ -57,6 +58,18 @@ export const store = createStore<State>({
       const product: Product = await res.json();
       return product;
     }
+  },
+  mutations:{
+      addProduct(state, product){
+        state.basket.push(product);
+      },
+      deleteProduct(state, product){
+        state.basket=state.basket.filter((el: Product) => el.urlId != product.urlId);
+        console.log(state.basket)
+      },
+      deleteAllProduct (state){
+        state.basket=[];
+      }
   }
 })
 
