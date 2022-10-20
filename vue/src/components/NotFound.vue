@@ -109,6 +109,7 @@ button {
     border: 2px solid  #344B9D;
     font-size: large;
     margin-top: 15px;
+    cursor: pointer;
 }
 button:hover {
     background-color:  #344B9D;
