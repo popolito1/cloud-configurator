@@ -18,8 +18,17 @@ export interface Product {
   url: string,
   description: string,
   category: string
-  fiche: Object
+  fiche: Fiche
 }
+
+interface Fiche {
+  [Key: string] : Feature
+}
+
+interface Feature{
+  [Key: string] : Array<string> | string
+}
+
 
 // define injection key
 export const key: InjectionKey<Store<State>> = Symbol()

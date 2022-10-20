@@ -10,7 +10,8 @@
         </th>
 
     
-
+       
+}
     </table>
   <div>
     <p>{{product.fiche}}</p>
@@ -35,7 +36,15 @@ export default defineComponent({
     getProduct(){
       this.store.dispatch("getProduct",{category:this.$route.params.category, urlId:this.$route.params.urlId})
       .then(data => this.product = data)
+    },
+   /* getDataSheet(){
+      for(const [featureName, feature] of Object.entries(this.product.fiche)){
+    //chaque feature a des labels
+      for(const [labelName, label] of Object.entries(feature)){
+        //here label can have a list of values or a single string value
+        //maybe check the type of label to see
     }
+    }*/
 
   },
   mounted(){
@@ -45,7 +54,6 @@ export default defineComponent({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 .dataSheet{
