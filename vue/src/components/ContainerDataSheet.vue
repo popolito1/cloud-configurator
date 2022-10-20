@@ -2,20 +2,15 @@
 <template>
 <div class="dataSheet">
     <div><h1> Fiche Technique</h1></div>
-    <table class="tableDataSheet">
+    <table v-for="(feature, label) in product.fiche" :key="label">
         <th>
-            <td>Caracteristiques a gauche</td>
-            <td>Caracteristique au milieu</td>
-            <td>Caracteristique a droite</td>
+            {{label}}
         </th>
-
-    
-       
-}
+        <tr v-for="(value, name) in feature" :key="name">
+            <td id="first-column">{{name}}</td>
+            <td id="second-column">{{value}}</td>
+        </tr>
     </table>
-  <div>
-    <p>{{product.fiche}}</p>
-  </div>
 </div>
 </template>
 
@@ -37,15 +32,6 @@ export default defineComponent({
       this.store.dispatch("getProduct",{category:this.$route.params.category, urlId:this.$route.params.urlId})
       .then(data => this.product = data)
     },
-   /* getDataSheet(){
-      for(const [featureName, feature] of Object.entries(this.product.fiche)){
-    //chaque feature a des labels
-      for(const [labelName, label] of Object.entries(feature)){
-        //here label can have a list of values or a single string value
-        //maybe check the type of label to see
-    }
-    }*/
-
   },
   mounted(){
     this.getProduct();
@@ -68,20 +54,30 @@ export default defineComponent({
   border-radius: 50px;
 }
 table{
-    width:100%;
-}
-.tableDataSheet{
-    display:flex;
-    justify-content: center;
+    width:70%;
+    margin: 30px;
+    border-collapse:collapse;
+    border:2px solid;
+    border-color: transparent  transparent rgba(52, 75, 157, 0.6) rgba(82, 98, 155, 0.6) ;
+
+
 }
 th{
-    margin : 50px;
-    border: solid;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 16px 32px;
+    padding: 16px 20px;
+    font-size: 25px
+}
 
+
+td{
+  width: 40%;
+  border:1px solid rgba(124, 124, 124, 0.25);
+}
+#second-column{
+  width: 70%;
 }
 
 </style>

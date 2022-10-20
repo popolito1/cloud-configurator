@@ -21,34 +21,35 @@
  </template>
   
 <script lang="ts">
-export default{
-name: "NotFound",
-data() {
-    return {
-        seconds: 5,
-        sec: "secondes",
-    };
-},
-methods:{
-    countDownTimer() {
-      if (this.seconds >= 0) {
-        setTimeout(() => {
-          this.seconds--;
-          this.countDownTimer();
-        }, 1000);
-        if (this.seconds == 1) {
-          this.sec = "seconde";
+    import { defineComponent } from 'vue';
+    export default defineComponent({
+        name: "NotFound",
+        data() {
+            return {
+                seconds: 5,
+                sec: "seconds",
+            };
+        },
+        methods:{
+            timer(){
+                if (this.seconds>0){
+                    setTimeout(() => {
+                        this.seconds--;
+                        this.timer()
+                    }, 1000);
+                }
+                if (this.seconds == 1) {
+                    this.sec = "second";
+                }
+                if (this.seconds == 0) {
+                    this.$router.push("/");
+                }
+            }
+        },
+        created(){
+            this.timer()
         }
-        if (this.seconds == 0) {
-          this.$router.push("/");
-        }
-      }
-    }
-},
-created(){
-    this.countDownTimer();
-}
-}
+    })
   </script>
   
   <!-- Add "scoped" attribute to limit CSS to this component only -->
