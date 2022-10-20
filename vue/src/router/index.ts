@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import ConfiguratorPage from '../components/ConfiguratorPage.vue'
-import ConfiguratorChoicePage from '../components/ConfiguratorChoicePage.vue'
-import ContainerProduct from '../components/ContainerProduct.vue'
-import BillPage from '../components/BillPage.vue'
-import NotFound from '../components/NotFound.vue'
-import HomePage from '../components/HomePage.vue'
+import ConfiguratorPage from '../pages/ConfiguratorPage.vue'
+import ConfiguratorChoicePage from '../pages/ConfiguratorChoicePage.vue'
+import ContainerProduct from '../pages/ContainerProduct.vue'
+import BillPage from '../pages/BillPage.vue'
+import NotFound from '../pages/NotFound.vue'
+import HomePage from '../pages/HomePage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {

@@ -53,7 +53,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore, Product } from '../store'
-import ContainerDataSheet from './ContainerDataSheet.vue'
+import ContainerDataSheet from '../components/ContainerDataSheet.vue'
 
 export default defineComponent({
   name: 'ContainerProduct',
