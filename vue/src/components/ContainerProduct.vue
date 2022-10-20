@@ -29,7 +29,7 @@
                   {{product.price}} {{product.currency}}
                 </div>
                 <br/>
-                <button>Configurate your PC with this product</button>
+                <button>Configure your PC with this product</button>
               </div>
             </th>
           </tr>
@@ -59,8 +59,8 @@ export default defineComponent({
   },
   methods:{
     getProduct(){
-      this.store.dispatch("getProduct",{category:'processeurs', urlId:"PB00493654"})
-        .then(data => this.product = data)
+      this.store.dispatch("getProduct",{category:this.$route.params.category, urlId:this.$route.params.urlId})
+      .then(data => this.product = data)
     }
 
   },

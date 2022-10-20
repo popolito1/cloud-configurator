@@ -9,6 +9,8 @@
             <td>Caracteristique a droite</td>
         </th>
 
+    
+
     </table>
   <div>
     <p>{{product.fiche}}</p>
@@ -31,8 +33,8 @@ export default defineComponent({
   },
   methods:{
     getProduct(){
-      this.store.dispatch("getProduct",{category:'processeurs', urlId:"PB00493654"})
-        .then(data => this.product = data)
+      this.store.dispatch("getProduct",{category:this.$route.params.category, urlId:this.$route.params.urlId})
+      .then(data => this.product = data)
     }
 
   },
