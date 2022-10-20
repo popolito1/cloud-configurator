@@ -1,16 +1,12 @@
 <template>
-  <ContainerProduct />
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-import ContainerProduct from './components/ContainerProduct.vue';
-
+  
 export default defineComponent({
-  name: 'App',
-  components: {
-    ContainerProduct
-  }
+    name: "App",
 });
 </script>
 
@@ -21,6 +17,5 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
