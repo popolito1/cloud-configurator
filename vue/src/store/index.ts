@@ -1,5 +1,5 @@
 // store.ts
-import { InjectionKey } from 'vue'
+import { FieldsetHTMLAttributes, InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 
 // define your typings for the store state
@@ -18,7 +18,15 @@ export interface Product {
   url: string,
   description: string,
   category: string
-  fiche: Object
+  fiche: Fiche
+}
+
+interface Fiche {
+  [Key: string] : Feature
+}
+
+interface Feature{
+  [Key: string] : Array<string> | string
 }
 
 // define injection key
