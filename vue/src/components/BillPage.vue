@@ -2,7 +2,7 @@
     <div class="container">
         <table>
             <tr>
-                <td><div class="logotype">Logo</div></td>
+                <td><div class="logotype"><img :src="require('@/assets/logo.png')" alt="Logo"></div></td>
                 <td><div>Bill</div></td>
                 <td></td>
             </tr>
@@ -65,8 +65,8 @@
         data(){
             return {
                 store: useStore(),
-                basket: new Array<Product>(),
-                date: ''
+                date: '',
+                basket: new Array<Product>()
             }
         },
         created() {
@@ -74,16 +74,7 @@
             this.date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         },
         mounted(){
-            this.getBasket();
-        },
-        methods:{
-            async getBasket(){
-                let array = [{urlId: "PB00340585", category:"aio_coolers"},{urlId: "PB00505045", category: "graphic_cards"},{urlId: "PB00346166", category: "motherboards"},{urlId: "PB00493654", category: "processeurs"},{urlId: "PB00400847", category: "psu"},{urlId: "PB00271616", category: "ram"}]
-                for (const element of array) {
-                    let product = await this.store.dispatch("getProduct",element)
-                    this.basket.push(product)
-                }
-            }
+            this.basket = this.store.getters["getBasket"]
         },
         computed: {
             totalPrice: function() {
