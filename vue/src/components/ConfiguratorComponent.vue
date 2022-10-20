@@ -1,104 +1,99 @@
 <template>
     <div class="container">
-        <div class="Elements">
-        <ConfiguratorElement :product=getProcesseur category="Processeur" image="Processeur.png"></ConfiguratorElement>
-        <ConfiguratorElement :product=getCooler category="Ventirad" image="Ventirad.png"></ConfiguratorElement>
-        <ConfiguratorElement :product=getMotherboard category="Carte mère" image="CarteMere.png"></ConfiguratorElement>
-        </div>
-        <div class="Elements" id="MiddleElement">
-        <div class="space"></div>
-        <ConfiguratorElement :product=getRam category="Mémoire vive" image="MemoireVive.png"></ConfiguratorElement>
-        <div class="space"></div>
-        </div>
-        <div class="Elements">
-        <ConfiguratorElement :product=getGraphicCard category="Carte Graphique" image="CarteGraphique.png"></ConfiguratorElement>
-        <ConfiguratorElement :product=getCase category="Boitier" image="Boitier.png"></ConfiguratorElement>
-        <ConfiguratorElement :product=getPsu category="Alimentation" image="Alimentation.png"></ConfiguratorElement>
-        </div>
+        <ConfiguratorElement 
+            v-for="category in categories" 
+            :key="category" :class="category" :product="getProduct(category)" 
+            :category="categoryType[category as keyof typeof categoryType].plural">
+        </ConfiguratorElement>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import ConfiguratorElement from './ConfiguratorElement.vue';
-import { Product } from '../store';
+    import { defineComponent } from 'vue';
+    import ConfiguratorElement from './ConfiguratorElement.vue';
+    import { useStore, Product } from '../store';
 
-export default defineComponent({
-    name: "ConfiguratorComponent",
-    components: { ConfiguratorElement },
-    props:{
-        basket: {
-            type: Object,
-            default: null
+    export default defineComponent({
+        name: "ConfiguratorComponent",
+        components: { ConfiguratorElement },
+        data(){
+            return{
+                store: useStore(),
+                categories: ["processeur", "aio_cooler", "motherboard", "ram", "graphic_card", "case", "psu"],
+                categoryType: {
+                    processeur: {plural:"processeurs"},
+                    aio_cooler: {plural:"aio_coolers"},
+                    motherboard: {plural:"motherboards"},
+                    ram: {plural:"ram"},
+                    graphic_card: {plural:"graphic_cards"},
+                    case: {plural:"cases"},
+                    psu: {plural:"psu"}
+                }
+            }
+        },
+        methods: {
+            getProduct(category: string){
+                let product =this.store.getters["getBasket"].filter((el: Product) => el.category == category)
+                if(product.length>0){
+                    return product[0]
+                }else{return null}
+            }
         }
-    },
-    computed:{
-        getProcesseur(){
-            let product = this.basket.filter((el: Product) => el.category == "processeur")
-            if(product.length>0){
-                return product[0]
-            }else{return null}
-        },
-        getCooler(){
-            let product = this.basket.filter((el: Product) => el.category == "aio_cooler")
-            if(product.length>0){
-                return product[0]
-            }else{return null}
-        },
-        getGraphicCard(){
-            let product = this.basket.filter((el: Product) => el.category == "graphic_card")
-            if(product.length>0){
-                return product[0]
-            }else{return null}
-        },
-        getMotherboard(){
-            let product = this.basket.filter((el: Product) => el.category == "motherboard")
-            if(product.length>0){
-                return product[0]
-            }else{return null}
-        },
-        getPsu(){
-            let product = this.basket.filter((el: Product) => el.category == "psu")
-            if(product.length>0){
-                return product[0]
-            }else{return null}
-        },
-        getRam(){
-            let product = this.basket.filter((el: Product) => el.category == "ram")
-            if(product.length>0){
-                return product[0]
-            }else{return null}
-        },
-        getCase(){
-            let product = this.basket.filter((el: Product) => el.category == "case")
-            if(product.length>0){
-                return product[0]
-            }else{return null}
-        }
-    }
-});
+    });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         width:50%;
         margin: 10px;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);  
+        row-gap: 100px; 
+        column-gap: 100px;  
     }
-    .Elements{
-        display: flex;
-        margin: 15px;
-        width: 100%;
-        justify-content: space-between;
     
+    .ram{
+        grid-column: 2;
+        grid-row: 2;
     }
 
-    .space{
-        width: 100px;
+    .graphic_card, .case, .psu{
+        grid-row: 3;
     }
+
+    @media (max-width: 700px) {
+        .container { 
+            grid-template-columns: repeat(1, 1fr); 
+            row-gap: auto;
+            column-gap: auto;
+        }
+        .ram{
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        .graphic_card, .case, .psu{
+            grid-row: auto;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .container { 
+            grid-template-columns: repeat(1, 1fr); 
+            row-gap: auto;
+            column-gap: auto;
+        }
+        .ram{
+            grid-column: auto;
+            grid-row: auto;
+        }
+
+        .graphic_card, .case, .psu{
+            grid-row: auto;
+        }
+    }
+
+
 </style>
 
 
