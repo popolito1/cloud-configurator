@@ -288,18 +288,15 @@
         </table>
       </div>
   </div>
-  <ContainerDataSheet/></div>
+   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore, Product } from '../store'
-import ContainerDataSheet from './ContainerDataSheet.vue'
+import { getProducts } from '../products'
 export default defineComponent({
   name: 'ContainerProduct',
-  components: {
-    ContainerDataSheet
-  },
   data(){
     return {
       store: useStore(),
@@ -312,23 +309,23 @@ export default defineComponent({
     }
   },
   methods:{
-    getProducts(){
-      this.store.dispatch("getProducts",{category:'processeurs'})
+    Products(){
+      getProducts("processeurs")
         .then(data => this.proc = data),
-      this.store.dispatch("getProducts",{category:'psu'})
+      getProducts("psu")
         .then(data => this.psu = data),
-      this.store.dispatch("getProducts",{category:'graphic_cards'})
+      getProducts("graphic_cards")
         .then(data => this.graphic_cards = data),
-      this.store.dispatch("getProducts",{category:'aio_coolers'})
+      getProducts("aio_coolers")
         .then(data => this.aio_coolers = data),
-      this.store.dispatch("getProducts",{category:'motherboards'})
+      getProducts("motherboards")
         .then(data => this.motherboards = data),
-      this.store.dispatch("getProducts",{category:'ram'})
+      getProducts("ram")
         .then(data => this.ram = data)
     }
   },
   mounted(){
-    this.getProducts();
+    this.Products();
   }
   
 });

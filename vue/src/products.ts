@@ -9,8 +9,7 @@ export async function getProduct(category: string | string[], urlId: string | st
           "urlId": urlId
         })        
       })
-      const product: Product = await res.json();
-      return product;
+      return await res.json();
 }
 
 export async function getProducts(category: string | string[]):Promise<Product[]> {
@@ -19,6 +18,5 @@ export async function getProducts(category: string | string[]):Promise<Product[]
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"category": category})        
     })
-    const products: Array<Product> = await res.json();
-    return products
+    return await res.json();
 }
