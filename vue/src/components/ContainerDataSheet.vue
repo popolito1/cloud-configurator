@@ -2,24 +2,22 @@
 <template>
 <div class="dataSheet">
     <div><h1> Fiche Technique</h1></div>
-    <table class="tableDataSheet">
+    <table v-for="(feature, label) in product.fiche" :key="label">
         <th>
-            <td>Caracteristiques a gauche</td>
-            <td>Caracteristique au milieu</td>
-            <td>Caracteristique a droite</td>
+            {{label}}
         </th>
-
+        <tr v-for="(value, name) in feature" :key="name">
+            <td id="first-column">{{name}}</td>
+            <td id="second-column">{{value}}</td>
+        </tr>
     </table>
-  <div>
-    <p>{{product.fiche}}</p>
-  </div>
 </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore, Product } from '../store'
-
+import { getProduct } from '../products'
 
 export default defineComponent({
   name: 'ContainerDataSheet',
@@ -30,20 +28,18 @@ export default defineComponent({
     }
   },
   methods:{
-    getProduct(){
-      this.store.dispatch("getProduct",{category:'processeurs', urlId:"PB00493654"})
+    Product(){
+      getProduct(this.$route.params.category, this.$route.params.urlId)
         .then(data => this.product = data)
     }
-
   },
   mounted(){
-    this.getProduct();
+    this.Product();
   }
   
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 .dataSheet{
@@ -58,20 +54,30 @@ export default defineComponent({
   border-radius: 50px;
 }
 table{
-    width:100%;
-}
-.tableDataSheet{
-    display:flex;
-    justify-content: center;
+    width:70%;
+    margin: 30px;
+    border-collapse:collapse;
+    border:2px solid;
+    border-color: transparent  transparent rgba(52, 75, 157, 0.6) rgba(82, 98, 155, 0.6) ;
+
+
 }
 th{
-    margin : 50px;
-    border: solid;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 16px 32px;
+    padding: 16px 20px;
+    font-size: 25px
+}
 
+
+td{
+  width: 40%;
+  border:1px solid rgba(124, 124, 124, 0.25);
+}
+#second-column{
+  width: 70%;
 }
 
 </style>

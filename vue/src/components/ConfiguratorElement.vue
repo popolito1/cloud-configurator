@@ -1,7 +1,7 @@
 <template>
     <div class="containerElement">
-        <img :src="require(`@/assets/configuratorElements/${image}`)">
-        <h2>{{category}}</h2>
+        <img :src="require(`@/assets/configuratorElements/${categoryType[category as keyof typeof categoryType].image}`)">
+        <h2>{{categoryType[category as keyof typeof categoryType].fr}}</h2>
         <div class="buttons">
             <ConfiguratorElementButton @click= addProduct() v-if="product==null" color="add">
                 <font-awesome-icon :icon="['fas','plus']"/>
@@ -24,8 +24,17 @@
     export default defineComponent({
         name: 'ConfiguratorElement',
         data(){
-        return{
-            store: useStore()
+            return{
+                store: useStore(),
+                categoryType: {
+                    processeurs: {fr:"Processeur", image:"Processeur.png"},
+                    aio_coolers: {fr:"Ventirad", image:"Ventirad.png"},
+                    motherboards: {fr:"Carte Mère", image:"CarteMere.png"},
+                    ram: {fr:"Mémoire Vive", image:"MemoireVive.png"},
+                    graphic_cards: {fr:"Carte Graphique", image:"CarteGraphique.png"},
+                    cases: {fr:"Boîtier", image:"Boitier.png"},
+                    psu: {fr:"Alimentation", image:"Alimentation.png"}
+                }
             }
         },
         components:{
@@ -33,99 +42,40 @@
         },
         props: {
             category: String,
-            image: String,
             product: {
                 type: Object,
                 default: null
             }
         },
-        methods:{
+        methods: {
             addProduct(){
-                let categoryName;
-                switch (this.category) {
-                    case "Ventirad":
-                        categoryName="aio_coolers";
-                        break;
-                    case "Carte graphique":
-                        categoryName="graphic_cards";
-                        break;
-                    case "Carte mère":
-                        categoryName="motherboards";
-                        break;
-                    case "Processeur":
-                        categoryName="processeurs";
-                        break;
-                    case "Alimentation":
-                        categoryName="psu";
-                        break;
-                    case "Mémoire vive":
-                        categoryName="ram";
-                        break;
-                    case "Boitier":
-                        categoryName="cases";
-                        break;
-                    default:
-                        categoryName=this.category;
-                        break;
-                }
-                this.$router.push("/configurator/"+categoryName+"/add");
+                this.$router.push("/configurator/"+this.category+"/add");
             },
             deleteProduct(){
                 this.store.commit('deleteProduct',this.product)
             },
             editProduct(){
-                let categoryName;
-                switch (this.category) {
-                    case "Ventirad":
-                        categoryName="aio_coolers";
-                        break;
-                    case "Carte graphique":
-                        categoryName="graphic_cards";
-                        break;
-                    case "Carte mère":
-                        categoryName="motherboards";
-                        break;
-                    case "Processeur":
-                        categoryName="processeurs";
-                        break;
-                    case "Alimentation":
-                        categoryName="psu";
-                        break;
-                    case "Mémoire vive":
-                        categoryName="ram";
-                        break;
-                    case "Boitier":
-                        categoryName="cases";
-                        break;
-                    default:
-                        categoryName=this.category;
-                        break;
-                }
-                this.$router.push("/configurator/"+categoryName+"/edit");
-            }
-            
+                this.$router.push("/configurator/"+this.category+"/edit");
+            }  
         },
     });
 
 </script>
 
 <style scoped>
-
-.buttons{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-img{
-    width: 100px;
-}
-.containerElement{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-}
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    img{
+        width: 100px;
+    }
+    .containerElement{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 200px;
+    }
 </style>
