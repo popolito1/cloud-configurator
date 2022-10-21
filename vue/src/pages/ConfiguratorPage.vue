@@ -7,8 +7,8 @@
   
 <script lang="ts">
     import { defineComponent } from 'vue';
-    import ConfiguratorComponent from './ConfiguratorComponent.vue';
-    import SummaryComponent from './SummaryComponent.vue';
+    import ConfiguratorComponent from '../components/ConfiguratorComponent.vue';
+    import SummaryComponent from '../components/SummaryComponent.vue';
 
     export default defineComponent({
     name: 'ConfiguratorPage',

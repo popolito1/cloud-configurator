@@ -1,6 +1,6 @@
 import { Product } from './store'
 
-export async function getProduct(category: string, urlId: string):Promise<Product> {
+export async function getProduct(category: string | string[], urlId: string | string[]):Promise<Product> {
     const res: Response = await fetch("http://localhost:8081/API/product",{
         method:"POST",
         headers: {'Content-Type': 'application/json'},
