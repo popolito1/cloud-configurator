@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="product">
        <div class="Bigcontainer">
           <div class="title">
@@ -17,18 +18,6 @@
             <th class="photo"> <img :src="product.image"  /> </th>
             <th>
               <div class="containerDescription">
-                <div class="rate">
-                  <input type="radio" id="star5" name="rate" value="5" />
-                  <label for="star5" title="text">5 stars</label>
-                  <input type="radio" id="star4" name="rate" value="4" />
-                  <label for="star4" title="text">4 stars</label>
-                  <input type="radio" id="star3" name="rate" value="3" />
-                  <label for="star3" title="text">3 stars</label>
-                  <input type="radio" id="star2" name="rate" value="2" />
-                  <label for="star2" title="text">2 stars</label>
-                  <input type="radio" id="star1" name="rate" value="1" />
-                  <label for="star1" title="text">1 star</label>
-                </div>
                 <div class="description">{{product.description}}</div>
               </div>
             </th>
@@ -40,14 +29,16 @@
                   {{product.price}} {{product.currency}}
                 </div>
                 <br/>
-                <button>Configurate your PC with this product</button>
+                <button>Configure your PC with this product</button>
               </div>
             </th>
           </tr>
         </table>
       </div>
+      
   </div>
   <ContainerDataSheet/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -69,10 +60,9 @@ export default defineComponent({
   },
   methods:{
     Product(){
-      getProduct('processeurs', "PB00493654")
+      getProduct(this.$route.params.category, this.$route.params.urlId)
         .then(data => this.product = data)
     }
-
   },
   mounted(){
     this.Product();
@@ -130,42 +120,6 @@ th{
  font-size: small;
 }
 
-.rate {
-    margin-left: auto;
-    margin-right: auto;
-    height: 46px;
-    padding: 0 10px;
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-}
 .container_price{
   display: flex;
   flex-direction: column;

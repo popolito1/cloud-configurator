@@ -28,6 +28,7 @@ interface Feature{
   [Key: string] : Array<string> | string
 }
 
+
 // define injection key
 export const key: InjectionKey<Store<State>> = Symbol()
 

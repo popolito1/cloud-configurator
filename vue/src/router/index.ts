@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     component: ConfiguratorChoicePage,
   },
   {
-    path: '/product/:productId',
+    path: '/product/:category/:urlId',
     name: "productPage",
     component: ContainerProduct
   },
