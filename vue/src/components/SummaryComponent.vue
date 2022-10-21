@@ -4,10 +4,10 @@
             <h2>Récapitulatif</h2>
         </div>
         <div class="containerSummary">
-            <SummaryElement v-for="product in basket" :key="product.urlId" :product="product"/>
+            <SummaryElement v-for="product in store.getters['getBasket']" :key="product.urlId" :product="product"/>
         </div>
         <div>
-            <p id="price">Total : {{getTotalPrice}} €</p>
+            <p id="price">Total : {{totalPrice}} €</p>
             <button class="buttons" @click=deleteAllProduct() >Vider</button>
             <button class="buttons">Valider</button>
         </div>
@@ -20,35 +20,29 @@
     import { useStore } from '../store'
 
     export default defineComponent({
-    name: 'SummaryComponent',
-    data(){
-        return{
-            store: useStore()
-        }
-    },
-    components : {
-        SummaryElement
-    },
-    props:{
-        basket: {
-            type: Object,
-            default: null
-        }
-    },
-    computed:{
-        getTotalPrice(){
-            let sum =0;
-            for (let i=0;i<this.basket.length;i++){
-                sum = sum + this.basket[i].price;
+        name: 'SummaryComponent',
+        data(){
+            return{
+                store: useStore()
             }
-            return sum;
+        },
+        components: {
+            SummaryElement
+        },
+        computed:{
+            totalPrice(){
+                let sum = 0
+                for (let i=0;i<this.store.getters["getBasket"].length;i++){
+                    sum = sum + this.store.getters["getBasket"][i].price;
+                }
+                return sum.toFixed(2);
+            }
+        },
+        methods:{
+            deleteAllProduct(){
+                this.store.commit('deleteAllProduct');
+            }
         }
-    },
-    methods:{
-        deleteAllProduct(){
-            this.store.commit('deleteAllProduct');
-        }
-    }
     });
 </script>
 
@@ -70,26 +64,26 @@
         
     }
     .buttons{
-    background-color: white;
-    border : 2px solid;
-    border-color: #344B9D;
-    border-radius: 30px;
-    color:black;
-    width:100px;
-    height: 50px;
-    margin: 5px;
-    font-weight: bold;
-    font-size:medium;
+        background-color: white;
+        border : 2px solid;
+        border-color: #344B9D;
+        border-radius: 30px;
+        color:black;
+        width:100px;
+        height: 50px;
+        margin: 5px;
+        font-weight: bold;
+        font-size:medium;
 }
 
-.buttons:hover{
-    background-color: #344B9D;
-    color: white;
-    cursor: pointer;
-}
+    .buttons:hover{
+        background-color: #344B9D;
+        color: white;
+        cursor: pointer;
+    }
 
-#price{
-    font-weight: bold;
-}
+    #price{
+        font-weight: bold;
+    }
 
 </style>

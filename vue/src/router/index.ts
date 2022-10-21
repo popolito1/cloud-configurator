@@ -1,17 +1,18 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import ConfiguratorPage from '../components/ConfiguratorPage.vue'
-import ConfiguratorChoicePage from '../components/ConfiguratorChoicePage.vue'
-import ContainerProduct from '../components/ContainerProduct.vue'
-//import BillPage from '../components/BillPage.vue'
-import NotFound from '../components/NotFound.vue'
-//import HomePage from '../components/HomePage.vue'
+import ConfiguratorPage from '../pages/ConfiguratorPage.vue'
+import ConfiguratorChoicePage from '../pages/ConfiguratorChoicePage.vue'
+import ContainerProduct from '../pages/ContainerProduct.vue'
+import BillPage from '../pages/BillPage.vue'
+import NotFound from '../pages/NotFound.vue'
+import HomePage from '../pages/HomePage.vue'
+import ProductsPage from '../pages/ProductsPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: "HomePage",
-    component: ContainerProduct
-  },/*
+    component: HomePage
+  },
   {
     path: '/configurator',
     name: "configurator",
@@ -27,16 +28,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "productPage",
     component: ContainerProduct
   },
-  /*{
+  {
     path: '/products',
     name: "productList",
-    component: PageProducts
-  },*/
-  /*{
+    component: ProductsPage
+  },
+  {
     path: '/bill',
     name: "BillPage",
     component: BillPage
-  },*/
+  },
   {
     path: '/:catchAll(.*)*',
     name: 'NotFound',

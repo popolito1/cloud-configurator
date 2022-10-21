@@ -44,7 +44,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore, Product } from '../store'
-import ContainerDataSheet from './ContainerDataSheet.vue'
+import { getProduct } from '../products'
+import ContainerDataSheet from '../components/ContainerDataSheet.vue'
 
 export default defineComponent({
   name: 'ContainerProduct',
@@ -58,14 +59,13 @@ export default defineComponent({
     }
   },
   methods:{
-    getProduct(){
-      this.store.dispatch("getProduct",{category:this.$route.params.category, urlId:this.$route.params.urlId})
-      .then(data => this.product = data)
+    Product(){
+      getProduct(this.$route.params.category, this.$route.params.urlId)
+        .then(data => this.product = data)
     }
-
   },
   mounted(){
-    this.getProduct();
+    this.Product();
   }
   
 });
