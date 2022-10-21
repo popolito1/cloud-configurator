@@ -1,10 +1,9 @@
 // store.ts
-import { FieldsetHTMLAttributes, InjectionKey } from 'vue'
+import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 
 // define your typings for the store state
 export interface State {
-  filter: String,
   basket: Array<Product>
 }
 
@@ -34,7 +33,6 @@ export const key: InjectionKey<Store<State>> = Symbol()
 
 export const store = createStore<State>({
   state: {
-    filter:"all",
     basket: []
   },
   getters: {
