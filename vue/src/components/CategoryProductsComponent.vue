@@ -70,7 +70,7 @@
             return {
                 modules: [Navigation, Scrollbar],
             };
-            },
+        },
     });
 </script>
 
