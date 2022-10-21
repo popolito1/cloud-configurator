@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>{{getCategoryName}}</h1>
+        <h1>{{categoryName}}</h1>
         <div class="SearchBar">
             <input class="searchingBar" type="text" v-model="searchQuery" placeholder="Search your product..."/>
             <p class="searchBarIcon"><font-awesome-icon id="search" :icon="['fas','search']"/></p>
@@ -35,6 +35,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import { useStore, Product } from '../store'
+    import { getProducts } from '../products'
     const categoryNames = {
         processeurs: "Processeurs",
         aio_coolers: "Ventirad",
@@ -68,11 +69,11 @@
         }
     },
     mounted(){
-        this.getProducts()
+        this.Products()
     },
     methods:{
-        async getProducts(){
-            this.products = await this.store.dispatch("getProducts",this.$route.params.category)
+        async Products(){
+            this.products = await getProducts(this.$route.params.category)
         },
         validateChoice(){
             if(this.$route.params.type=="edit"){ //edit
@@ -89,7 +90,7 @@
         
     },
     computed:{
-        getCategoryName(){
+        categoryName(){
             return categoryNames[this.$route.params.category as keyof typeof categoryNames]
         },
         filteredProducts(): Array<Product>{

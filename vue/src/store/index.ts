@@ -42,29 +42,6 @@ export const store = createStore<State>({
       return state.basket;
     }
   },
-  actions: {
-    async getProducts({commit, state}, category: string) {
-      const res: Response = await fetch("http://localhost:8081/API/products",{
-        method:"POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"category": category})        
-      })
-      const products: Array<Product> = await res.json();
-      return products
-    },
-    async getProduct({commit, state}, params:{category: string, urlId: string}){
-      const res: Response = await fetch("http://localhost:8081/API/product",{
-        method:"POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          "category": params.category,
-          "urlId": params.urlId
-        })        
-      })
-      const product: Product = await res.json();
-      return product;
-    }
-  },
   mutations:{
       addProduct(state, product){
         state.basket.push(product);

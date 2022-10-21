@@ -25,20 +25,19 @@ interface Product {
     fiche: Object
 }
 
-function openJsonFile(fileName:string){
-    let raw: string = fs.readFileSync(`./fiche_techniques/${fileName}.json`)
-    let data = <Product[]> JSON.parse(raw)
-    return data;
+async function openJsonFile(fileName:string) {
+    let raw: string = await fs.readFileSync(`./fiche_techniques/${fileName}.json`)
+    return JSON.parse(raw)
 }
 
-function getProducts(req: Request, res: Response){
-    let data: Array<Product> = openJsonFile(req.body.category)
+async function getProducts(req: Request, res: Response){
+    let data: Array<Product> = await openJsonFile(req.body.category)
     res.status(200).json(data)
 }
 
-function getProduct(req: Request, res: Response){
+async function getProduct(req: Request, res: Response){
     const urlId: string = req.body.urlId;
-    let data: Array<Product> = openJsonFile(req.body.category)
+    let data: Array<Product> = await openJsonFile(req.body.category)
     let product = data.filter(el => el.urlId == urlId)
     res.status(200).json(product[0])
 }
