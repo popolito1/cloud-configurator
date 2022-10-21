@@ -5,6 +5,7 @@ import ContainerProduct from '../pages/ContainerProduct.vue'
 import BillPage from '../pages/BillPage.vue'
 import NotFound from '../pages/NotFound.vue'
 import HomePage from '../pages/HomePage.vue'
+import ProductsPage from '../pages/ProductsPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -27,11 +28,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "productPage",
     component: ContainerProduct
   },
-  /*{
+  {
     path: '/products',
     name: "productList",
-    component: PageProducts
-  },*/
+    component: ProductsPage
+  },
   {
     path: '/bill',
     name: "BillPage",

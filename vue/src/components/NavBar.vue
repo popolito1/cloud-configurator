@@ -121,9 +121,8 @@ nav.navigation{
     padding: 10px;
     text-align: center;
     position: relative;
-    width: 100%;
-    height: 100%;
+    background-size: cover;
 
 }
-
 </style>
+

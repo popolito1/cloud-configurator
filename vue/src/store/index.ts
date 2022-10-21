@@ -1,4 +1,3 @@
-// store.ts
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 

@@ -16,25 +16,25 @@
                       <div1>
                         <div class="button_container">
                             <button>
-                                hello
+                                Processeur
                             </button>
                             <button>
-                                hello
+                                Carte mère 
                             </button>
                             <button>
-                                hello
+                                Mémoire vive
                             </button>
                             <button>
-                                hello
+                                Carte graphique
                             </button>
                             <button>
-                                hello
+                                Boitier
                             </button>
                             <button>
-                                hello
+                                Alimentation
                             </button>
                             <button>
-                                hello
+                                Ventirad
                             </button>
                         </div>
                      </div1>
