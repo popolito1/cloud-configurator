@@ -3,7 +3,7 @@
         <div class="title-container">
             <h1 class="first-four">4</h1>
             <div>
-                <img src="../assets/gearing.png" alt="gearing"/>
+                <img src="../assets/notFoundElements/gearing.png" alt="gearing"/>
             </div>
             <h1 class="second-four">4</h1>
         </div>

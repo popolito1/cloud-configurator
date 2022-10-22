@@ -6,7 +6,7 @@
 
 <script lang="ts">
     import { defineComponent } from 'vue';
-    import CategoryProductsComponent from '@/components/CategoryProductsComponent.vue';
+    import CategoryProductsComponent from '../components/CategoryProductsComponent.vue';
 
     export default defineComponent({
     name: "ProductsPage",
