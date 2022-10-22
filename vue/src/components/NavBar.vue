@@ -2,13 +2,13 @@
     <nav class="navigation">
         <ul>
             <li class="elementNav">
-                <router-link to="/">Home</router-link>
+                <router-link to="/">Page d'accueil</router-link>
             </li>
             <li class="elementNav">
-                <router-link to="/products">Products</router-link>
+                <router-link to="/products">Produits</router-link>
             </li>
             <li class="elementNav">
-                <router-link to="/configurator">Configurator</router-link>
+                <router-link to="/configurator">Configurateur</router-link>
             </li>
         </ul>
     </nav>
@@ -33,7 +33,6 @@ nav.navigation ul li.elementNav{
 
 }
 
-
 nav.navigation ul li.elementNavv{
     list-style-type: none;
     display: inline-block;
@@ -50,7 +49,6 @@ nav.navigation ul li.elementNav a{
     background-color: #5D7963;
     color: #F6F6F6;
     padding: 10px;
-    font-family: 'Courier New', Courier, monospace ;
     font-size: 150%;
     background:  rgba(216, 252, 223, 0.0);   
 }
@@ -92,29 +90,12 @@ nav.navigation ul li.elementNavv a:hover span{
 }
 
 
-#navbar{
-    position: fixed;
-    width: 100%;
-    background:  rgba(93, 121, 99, 0.0);
-    display: block;
-    transition: top 0.3s;
-    top: -500000px;
-
-}
-
-#navbar a{
-    display: block;
-    text-align: center;
-    
-}
 
 
 nav.navigation ul li.elementNav:hover a{
     color: #F6F6F6;
     background:  rgba(93, 121, 99, 0.0);
     transition: 0.3s all;
-
-
 }
 nav.navigation{
     background-color: #344B9D;
@@ -122,7 +103,14 @@ nav.navigation{
     text-align: center;
     position: relative;
     background-size: cover;
+}
 
+.elementNav:hover{
+    border : 3px solid aliceblue;
+    border-radius: 10px;
+}
+.navigation{
+    width:100%;
 }
 </style>
 
