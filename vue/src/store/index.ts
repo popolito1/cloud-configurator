@@ -3,7 +3,7 @@ import { createStore, useStore as baseUseStore, Store } from 'vuex'
 
 // define your typings for the store state
 export interface State {
-  basket: Array<Product>
+  basket: Product[]
 }
 
 export interface Product {
@@ -16,7 +16,8 @@ export interface Product {
   url: string,
   description: string,
   category: string
-  fiche: Fiche
+  fiche: Fiche,
+  compat: Object
 }
 
 interface Fiche {
@@ -24,7 +25,7 @@ interface Fiche {
 }
 
 interface Feature{
-  [Key: string] : Array<string> | string
+  [Key: string] : string[] | string
 }
 
 
@@ -45,11 +46,10 @@ export const store = createStore<State>({
         state.basket.push(product);
       },
       deleteProduct(state, product){
-        state.basket=state.basket.filter((el: Product) => el.urlId != product.urlId);
-        console.log(state.basket)
+        state.basket = state.basket.filter(el => el.urlId != product.urlId);
       },
       deleteAllProduct (state){
-        state.basket=[];
+        state.basket = [];
       }
   }
 })
