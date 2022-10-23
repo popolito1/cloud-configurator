@@ -61,10 +61,19 @@ export async function getProduct(req: Request, res: Response){
 }
 
 async function getBasket(rawBasket: BasketProduct[]):Promise<Basket> {
+    const categoryType = {
+        processeur: {plural:"processeurs"},
+        aio_cooler: {plural:"aio_coolers"},
+        motherboard: {plural:"motherboards"},
+        ram: {plural:"ram"},
+        graphic_card: {plural:"graphic_cards"},
+        case: {plural:"cases"},
+        psu: {plural:"psu"}
+    }
     //rebuild the basket from category and urlId into Product Objects
     const basket: Basket = new Basket;
     for(const product of rawBasket){
-        const temp = await getProductFromFile(product.category, product.urlId);
+        const temp = await getProductFromFile(categoryType[product.category as keyof typeof categoryType].plural, product.urlId);
         const key: keyof Basket = product.category as keyof Basket;
         basket[key] = temp;
     }
