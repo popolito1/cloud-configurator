@@ -37,7 +37,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import { useStore, Product } from '../store'
-    import { getProducts } from '../products'
+    import { getProductsCompat } from '../products'
     const categoryNames = {
         processeurs: {fr: "Processeurs", singular: "processeur"},
         aio_coolers: {fr: "Ventirad", singular: "aio_cooler"},
@@ -67,7 +67,7 @@
         },
         methods:{
             async Products(){
-                this.products = await getProducts(this.$route.params.category)
+                this.products = await getProductsCompat(this.$route.params.category as string, this.store.getters["getBasket"])
             },
             validateChoice(){
                 if(this.$route.params.type=="edit"){
