@@ -3,7 +3,7 @@
         <table>
             <tr>
                 <td width="75px"><img :src="require('@/assets/notFoundElements/gearing.png')" alt="Logo"></td>
-                <td width="300px"><div class="title">Bill</div></td>
+                <td width="300px"><div class="title">Facture</div></td>
                 <td></td>
             </tr>
         </table> 
@@ -15,14 +15,14 @@
         </p><br>
         <table class="infoTable">
             <tr>
-            <td>
-                <strong>Date:</strong> {{date}}<br>
-                <strong>Type:</strong> Configurator summary<br>
-            </td>
-            <td>
-                <strong>E-mail:</strong> firstname@company.com<br>
-                <strong>Téléphone:</strong> 03 20 14 04 15<br>
-            </td>
+                <td>
+                    <strong>Date:</strong> {{date}}<br>
+                    <strong>Type:</strong> Récapitulatif du configurateur<br>
+                </td>
+                <td>
+                    <strong>E-mail:</strong> firstname@company.com<br>
+                    <strong>Téléphone:</strong> 03 20 14 04 15<br>
+                </td>
             </tr>
         </table><br>
         <div class="shoppingIcon"></div> 
@@ -32,7 +32,7 @@
                 <td width="20%" class="column-header">Image</td>
                 <td width="20%" class="column-header">Article</td>
                 <td width="40%" class="column-header">Details</td>
-                <td width="20%" class="column-header">Price</td>
+                <td width="20%" class="column-header">Prix</td>
             </tr>
             <tr v-for="article in basket" :key="article.urlId">
                 <td class="row"><img class="article-picture" :src="article.image"></td>
@@ -54,7 +54,6 @@
             </tr>
         </table>
         <div class="alert">* Garantie légale de conformité de 2 ans à compter de la remise du produit<br><br><strong>Droit de rétractation :</strong> vous pouvez vous rétracter en contactant notre Service après vente en lui adressant le formulaire de rétractation type dans un délai de quatorze jours à compter de la réception du produit. Vous devrez ensuite restituer le produit sans retard excessif et au plus tard quatorze jours suivant la date de communication de votre décision, en parfait état de revente.</div>
-        <div class="socialmedia">Follow us online</div>
     </div>
 </template>
 
