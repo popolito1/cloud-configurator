@@ -9,15 +9,12 @@
     import CategoryProductsComponent from '../components/CategoryProductsComponent.vue';
 
     export default defineComponent({
-    name: "ProductsPage",
-    data() {
-        return {
-            categories: ["processeurs", "aio_coolers", "motherboards", "ram", "graphic_cards", "psu"]
-        };
-    },
-    components: { CategoryProductsComponent }
-});
+        name: "ProductsPage",
+        data() {
+            return {
+                categories: ["processeurs", "aio_coolers", "motherboards", "ram", "graphic_cards", "psu"]
+            };
+        },
+        components: { CategoryProductsComponent }
+    });
 </script>
-
-<style scoped>
-</style>
