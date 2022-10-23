@@ -8,8 +8,8 @@
         </div>
         <div>
             <p id="price">Total : {{totalPrice}} €</p>
-            <button class="buttons" @click=deleteAllProduct() >Vider</button>
-            <button class="buttons">Valider</button>
+            <button class="buttons" @click=deleteAllProduct()>Vider</button>
+            <button class="buttons" @click=validate()>Valider</button>
         </div>
     </div>
 </template>
@@ -41,6 +41,9 @@
         methods:{
             deleteAllProduct(){
                 this.store.commit('deleteAllProduct');
+            },
+            validate(){
+                this.$router.push("/validate")
             }
         }
     });
