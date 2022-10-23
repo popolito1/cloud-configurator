@@ -12,7 +12,7 @@
                         <img :src=product.image >
                     </td>
                     <td>
-                        <strong>{{product.name}}</strong>
+                        <strong class="productName" @click="goToProduct(product.urlId)">{{product.name}}</strong>
                         <br>
                         {{product.extendedName}}
                     </td>
@@ -79,6 +79,9 @@
             },
             returnToConfigurator(){
                 this.$router.push("/configurator")
+            },
+            goToProduct(urlId: string){
+                this.$router.push("/product/" + this.$route.params.category + "/" + urlId)
             }
         },
         computed:{
@@ -154,5 +157,11 @@
 
     table{
         width: 100%;
+    }
+
+    .productName{
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
     }
 </style>
