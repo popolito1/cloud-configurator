@@ -16,8 +16,6 @@ interface Product {
 }
 
 interface Compat { 
-    //not well done because defined as if it would have all properties while it's not the case, but otherwise it breaks
-    //and i haven't been able to find another way for it to work
     ddr: string,
     chipset: string,
     mChipset: string[],
@@ -61,10 +59,19 @@ export async function getProduct(req: Request, res: Response){
 }
 
 async function getBasket(rawBasket: BasketProduct[]):Promise<Basket> {
+    const categoryType = {
+        processeur: {plural:"processeurs"},
+        aio_cooler: {plural:"aio_coolers"},
+        motherboard: {plural:"motherboards"},
+        ram: {plural:"ram"},
+        graphic_card: {plural:"graphic_cards"},
+        case: {plural:"cases"},
+        psu: {plural:"psu"}
+    }
     //rebuild the basket from category and urlId into Product Objects
     const basket: Basket = new Basket;
     for(const product of rawBasket){
-        const temp = await getProductFromFile(product.category, product.urlId);
+        const temp = await getProductFromFile(categoryType[product.category as keyof typeof categoryType].plural, product.urlId);
         const key: keyof Basket = product.category as keyof Basket;
         basket[key] = temp;
     }
@@ -95,6 +102,7 @@ async function checkCompat(category: string, product: Product, basket: Basket, t
             if(product.compat.ddr != basket.ram.compat.ddr) return false;
         }
         if(basket.motherboard){
+            if(basket.motherboard.compat.mChipset==undefined) return true;
             if(!basket.motherboard.compat.mChipset.includes(product.compat.chipset)) return false;
         }
         if(basket.psu){
@@ -111,6 +119,7 @@ async function checkCompat(category: string, product: Product, basket: Basket, t
         }
     } else if(category == "motherboards"){
         if(basket.processeur){
+            if(product.compat.mChipset==undefined) return true;
             if(!product.compat.mChipset.includes(basket.processeur.compat.chipset)) return false;
         }
         //check size

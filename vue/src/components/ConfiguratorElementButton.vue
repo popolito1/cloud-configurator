@@ -1,6 +1,6 @@
 <template>
     <button class="button" :style="cssColor">
-    <slot/>
+        <slot/>
     </button>
 </template>
   
@@ -8,9 +8,9 @@
     import { defineComponent } from 'vue';
 
     const colorPalette = {
-        add: {color:'#344B9D', icon: "['fas','plus']"},
-        edit: {color:'#FF8C00',icon:"['fas','pen']"},
-        delete: {color:'#FF4500',icon:"['fas','trash']"}
+        add: {color:'#344B9D'},
+        edit: {color:'#FF8C00'},
+        delete: {color:'#FF4500'}
     }
 
     export default defineComponent({
@@ -35,7 +35,6 @@
 </script>
 
 <style scoped>
-
     .button{
         background-color: white;
         border : 2px solid;
@@ -52,5 +51,4 @@
         color: white;
         cursor: pointer;
     }
-
 </style>

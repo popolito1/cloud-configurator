@@ -12,7 +12,7 @@
                         <img :src=product.image >
                     </td>
                     <td>
-                        <strong>{{product.name}}</strong>
+                        <strong class="productName" @click="goToProduct(product.urlId)">{{product.name}}</strong>
                         <br>
                         {{product.extendedName}}
                     </td>
@@ -37,7 +37,7 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import { useStore, Product } from '../store'
-    import { getProducts } from '../products'
+    import { getProductsCompat } from '../products'
     const categoryNames = {
         processeurs: {fr: "Processeurs", singular: "processeur"},
         aio_coolers: {fr: "Ventirad", singular: "aio_cooler"},
@@ -67,7 +67,7 @@
         },
         methods:{
             async Products(){
-                this.products = await getProducts(this.$route.params.category)
+                this.products = await getProductsCompat(this.$route.params.category as string, this.store.getters["getBasket"])
             },
             validateChoice(){
                 if(this.$route.params.type=="edit"){
@@ -79,6 +79,9 @@
             },
             returnToConfigurator(){
                 this.$router.push("/configurator")
+            },
+            goToProduct(urlId: string){
+                this.$router.push("/product/" + this.$route.params.category + "/" + urlId)
             }
         },
         computed:{
@@ -154,5 +157,11 @@
 
     table{
         width: 100%;
+    }
+
+    .productName{
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
     }
 </style>
