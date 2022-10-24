@@ -87,7 +87,7 @@
             }
         },
         methods:{
-            toDataURL(url: string, callback: any) {
+            toDataURL(url: string, callback: Function) {
                 //Convert url to base64 image
                 var xhr = new XMLHttpRequest();
                 xhr.onload = function() {
