@@ -120,7 +120,6 @@ def get_data_compat_psu():
 
 def get_data_compat_case():
     data = open_with_json(f"processed_data/case.json")
-    soup = get
 
 def get_fiche(soup: BeautifulSoup):
     table = soup.find("table", id="product-parameters")
@@ -167,15 +166,20 @@ if __name__ == "__main__":
             data = open_with_json(f"processed_data/{name}")
             new = []
             for i,el in enumerate(data):
-                time.sleep(5)
                 print(i)
-                url = data[0]['url']
+                url = data[i]['url']
                 soup = get_soup(url)
-                desc = get_description(soup)
-                out = get_fiche(soup)
+                try:
+                    desc = get_description(soup)
+                except:
+                    print("desc",el)
+                    desc = ""
+                try:
+                    out = get_fiche(soup)
+                except:
+                    print("fiche",el)
+                    out = {}
                 el['description'] = desc
                 el['fiche'] = out
                 new.append(el)
-                save_with_json(new, f"fiche_techniques/{name}")
-    
-    
+            save_with_json(new, f"fiche_techniques/{name}")
