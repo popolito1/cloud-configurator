@@ -10,8 +10,8 @@
         <br><br>
         <h2>Votre commande est confirmée !</h2>
         <p class="pub"> 
-        Des bons d'achat et des bons plans personnalisés !<br>
-        Inscrivez-vous pour recevoir des offres personnalisées en ligne, adaptées à vos habitudes d'achats et vos envies.
+            Des bons d'achat et des bons plans personnalisés !<br>
+            Inscrivez-vous pour recevoir des offres personnalisées en ligne, adaptées à vos habitudes d'achats et vos envies.
         </p><br>
         <table class="infoTable">
             <tr>
@@ -25,8 +25,7 @@
                 </td>
             </tr>
         </table><br>
-        <div class="shoppingIcon"></div> 
-        <h2 style="text-align: left;">Vos articles</h2>
+        <h2><font-awesome-icon style="color:#344B9D;" :icon="['fas','shopping-cart']"/> Vos articles</h2>
         <table class="articlesTable">
             <tr>
                 <td width="20%" class="column-header">Image</td>
@@ -122,17 +121,6 @@
         width: 50%; 
         background: #eee;
         padding: 20px;
-    }
-
-    .shoppingIcon{
-        background: #c5d0ff url(https://cdn4.iconfinder.com/data/icons/basic-ui-2-line/32/shopping-cart-shop-drop-trolly-128.png) no-repeat;
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-        background-position: center;
-        background-size: 25px;
-        float: left; 
-        margin-bottom: 15px;
     }
 
     .articlesTable{
