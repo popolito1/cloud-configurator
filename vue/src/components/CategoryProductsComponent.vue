@@ -66,7 +66,7 @@
                 this.$router.push("/product/" + this.category + "/" + urlId)
             }
         },
-        setup() {
+        setup(){
             return {
                 modules: [Navigation, Scrollbar],
             };
@@ -80,11 +80,12 @@
         font-size: 50px;
         color: #344B9D;
     }
+
     .container{
         margin: 50px;
     }
 
-    figure {
+    figure{
         font-family: 'Raleway', Arial, sans-serif;
         color: rgb(0, 0, 0);
         position: relative;
@@ -94,29 +95,34 @@
         text-align: center;
         cursor: pointer;
     }
-    figure * {
+
+    figure *{
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
     }
-    figure img {
+
+    figure img{
         opacity: 1;
         width: 100%;
         -webkit-transition: opacity 0.35s;
         transition: opacity 0.35s;
     }
-    figure figcaption {
+
+    figure figcaption{
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 100%;
     }
-    figure figcaption > div {
+
+    figure figcaption > div{
         height: 50%;
         overflow: hidden;
         width: 100%;
         position: relative;
     }
+
     figure h2{
         margin: 0;
         opacity: 0;
@@ -136,12 +142,13 @@
         transition-delay: 0s;
     }
 
-    figure:hover img {
+    figure:hover img{
         opacity: 0.3;
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
     }
-    figure:hover figcaption h2 {
+    
+    figure:hover figcaption h2{
         -webkit-transform: translate3d(0%, 0%, 0) rotate(0deg);
         transform: translate3d(0%, 0%, 0) rotate(0deg);
         opacity: 1;
