@@ -2,12 +2,12 @@
     <div class="container">
         <div>
             <h1>Téléchargez votre facture ici !</h1>
-            <button class="btnDownload"><font-awesome-icon :icon="['fas','file-download']"/> Download</button>
+            <button @click="printDownload" class="btnDownload"><font-awesome-icon :icon="['fas','file-download']"/> Download</button>
         </div>
         <div class="line"></div>
         <div>
             <h1>Aperçu :</h1>
-            <BillPage class="preview"></BillPage>
+            <BillPage id="BillPageComp" class="preview"></BillPage>
         </div>
   </div>
 </template>
@@ -15,10 +15,22 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import BillPage from './BillPage.vue';
+    const html2pdf = require("html2pdf.js");
 
     export default defineComponent({
         name: "ValidatePage",
-        components: { BillPage }
+        components: { BillPage },
+        methods:{
+            printDownload(){
+                const BillPageComp = document.querySelector("#BillPageComp");
+                let opt = {
+                    margin: 1,
+                    filename: "bill.pdf",
+                    image: { type: 'jpeg', quality: 0.98 }
+                };
+                html2pdf().from(BillPageComp).set(opt).save()
+            }
+        }
     });
 </script>
 
