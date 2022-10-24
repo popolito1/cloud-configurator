@@ -6,10 +6,13 @@
         <div class="containerSummary">
             <SummaryElement v-for="product in store.getters['getBasket']" :key="product.urlId" :product="product"/>
         </div>
-        <div>
+        <div v-if="store.getters['getBasket'].length!=0">
             <p id="price">Total : {{totalPrice}} €</p>
             <button class="buttons" @click=deleteAllProduct()>Vider</button>
             <button class="buttons" @click=validate()>Valider</button>
+        </div>
+        <div v-else>
+            <p>Choisissez les composants ci-contre, notre configurateur <strong>ajuste automatiquement la sélection en fonction des pièces ajoutées.</strong></p>
         </div>
     </div>
 </template>
