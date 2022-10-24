@@ -13,11 +13,10 @@ def item_data(item):
     return new
 
 if __name__ == "__main__":
-    fileName = "psu"
+    fileName = "case"
     data = open_with_json("raw_data/"+fileName+'.json')
-    print(data.keys())
     item_list = []
-    for item in data['data']:
+    for item in data:
         new = item_data(item)
         item_list.append(new)
     with open("processed_data/"+fileName+"_cleaned.json",'w') as file:

@@ -118,6 +118,10 @@ def get_data_compat_psu():
     soup = get_soup(data[0]['url'])
     get_data_compat(soup, ("Puissance et Rendement", "Puissance"))
 
+def get_data_compat_case():
+    data = open_with_json(f"processed_data/case.json")
+    soup = get
+
 def get_fiche(soup: BeautifulSoup):
     table = soup.find("table", id="product-parameters")
     tr_list = table.find_all("tr")
@@ -163,6 +167,7 @@ if __name__ == "__main__":
             data = open_with_json(f"processed_data/{name}")
             new = []
             for i,el in enumerate(data):
+                time.sleep(5)
                 print(i)
                 url = data[0]['url']
                 soup = get_soup(url)
