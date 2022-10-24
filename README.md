@@ -32,15 +32,21 @@ npm run serve
 ```
 cd server
 ```
-> 4. Installer npm
+> 5. Créer un ficher que vous renommez .env et mettez le dans server
+> 6. Remplissez-le avec les information ci-dessous
+```
+ORIGIN = "http://localhost:8080"
+PORT = "8081"
+```
+> 7. Installer npm
 ```
 npm install
 ```
-> 5. Build le server
+> 8. Build le server
 ```
 npm run build
 ```
-> 5. Run le server
+> 9. Run le server
 ```
 npm run start
 ```
@@ -49,5 +55,6 @@ npm run start
 
 La partie frontend  fonctionnera à l'adresse suivant : http://localhost:8080/
 La partie back end fonctionnera à l'adresse suivante : http://localhost:8081/ 
+
 
 
