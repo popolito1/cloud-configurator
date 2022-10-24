@@ -1,10 +1,10 @@
 # Projet Configurateur : Développement Web avancé
 
 ### Membres
-Elvin AUPIAIS--BERTHY
-Mohammed Saber BELLAAZIRI
-Monica-Pauline BLANC
-Hugo JAMINON 
+Elvin AUPIAIS--BERTHY  
+Mohammed Saber BELLAAZIRI  
+Monica-Pauline BLANC  
+Hugo JAMINON   
 
 ### Configuration du projet :  
   
