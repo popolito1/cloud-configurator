@@ -1,8 +1,10 @@
 # Projet Configurateur : Développement Web avancé
 
-> Sur Mac, allez dans le terminal pour effectuer toutes les commandes.
-
-> Sur windows, ouvrez une fenêtre du terminal de commande windows cmd
+### Membres
+Elvin AUPIAIS--BERTHY
+Mohammed Saber BELLAAZIRI
+Monica-Pauline BLANC
+Hugo JAMINON 
 
 ### Configuration du projet :  
   
@@ -13,12 +15,17 @@ https://nodejs.org/en/download/
 
 ### Compilez et chargez pour la partie frontend
 
-> 1. Installez npm 
+> 1. Aller dans le dossier vue
+```
+cd vue
+```
+
+> 2. Installez les dépendances 
 ```
 npm install
 ```
 
-> 2. Run la partie front 
+> 3. Run la partie front 
 
 ```
 npm run serve
@@ -32,13 +39,13 @@ npm run serve
 ```
 cd server
 ```
-> 5. Créer un ficher que vous renommez .env et mettez le dans server
+> 5. Créer un ficher .env et mettez le dans server
 > 6. Remplissez-le avec les information ci-dessous
 ```
 ORIGIN = "http://localhost:8080"
 PORT = "8081"
 ```
-> 7. Installer npm
+> 7. Installer les dépendances 
 ```
 npm install
 ```
@@ -53,7 +60,7 @@ npm run start
 
 ### Votre projet peut désormais fonctionner !
 
-La partie frontend  fonctionnera à l'adresse suivant : http://localhost:8080/
+La partie frontend  fonctionnera à l'adresse suivante : http://localhost:8080/
 La partie back end fonctionnera à l'adresse suivante : http://localhost:8081/ 
 
 
