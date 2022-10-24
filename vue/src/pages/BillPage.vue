@@ -2,7 +2,7 @@
     <div class="container">
         <table>
             <tr>
-                <td width="75px"><img :src="require('@/assets/logo.png')" alt="Logo"></td>
+                <td width="75px"><img :src="require('@/assets/logo2.png')" alt="Logo"></td>
                 <td width="300px"><div class="title">Facture</div></td>
                 <td></td>
             </tr>
