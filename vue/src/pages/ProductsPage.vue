@@ -12,7 +12,7 @@
         name: "ProductsPage",
         data() {
             return {
-                categories: ["processeurs", "aio_coolers", "motherboards", "ram", "graphic_cards", "psu"]
+                categories: ["processeurs", "aio_coolers", "motherboards", "ram", "graphic_cards", "psu", "cases"]
             };
         },
         components: { CategoryProductsComponent }
