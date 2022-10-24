@@ -54,10 +54,7 @@
             return{
                 store: useStore(),
                 products: new Array<Product>(),
-                choosenProduct: {
-                    type: Object,
-                    default: null
-                },
+                choosenProduct: {} as Product,
                 searchQuery:'',
                 categoryName: categoryNames[this.$route.params.category as keyof typeof categoryNames].fr
             }
@@ -70,12 +67,16 @@
                 this.products = await getProductsCompat(this.$route.params.category as string, this.store.getters["getBasket"])
             },
             validateChoice(){
-                if(this.$route.params.type=="edit"){
-                    let product = this.store.getters["getBasket"].filter((el: Product) => el.category == categoryNames[this.$route.params.category as keyof typeof categoryNames].singular)
-                    this.store.commit("deleteProduct", product[0])
+                if (this.choosenProduct.urlId===undefined){
+                    alert("Vous n'avez pas choisi de produits")
+                }else{
+                    if(this.$route.params.type=="edit"){
+                        let product = this.store.getters["getBasket"].filter((el: Product) => el.category == categoryNames[this.$route.params.category as keyof typeof categoryNames].singular)
+                        this.store.commit("deleteProduct", product[0])
+                    }
+                    this.store.commit("addProduct", this.choosenProduct)
+                    this.$router.push("/configurator")
                 }
-                this.store.commit("addProduct", this.choosenProduct)
-                this.$router.push("/configurator")
             },
             returnToConfigurator(){
                 this.$router.push("/configurator")
