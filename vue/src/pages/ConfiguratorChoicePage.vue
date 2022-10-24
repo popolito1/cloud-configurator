@@ -12,9 +12,11 @@
                         <img :src=product.image >
                     </td>
                     <td>
-                        <strong class="productName" @click="goToProduct(product.urlId)">{{product.name}}</strong>
+                        <strong>{{product.name}}</strong>
                         <br>
                         {{product.extendedName}}
+                        <br>
+                        <button class="myButton" @click="goToProduct(product.urlId)">Voir Fiche Produit</button>
                     </td>
                     <td>
                         <strong>
@@ -22,7 +24,7 @@
                         </strong>
                     </td>
                     <td>
-                        <input type="radio" name="choice" v-model="choosenProduct" v-bind:value="product"/>
+                        <input class="radio" type="radio" name="choice" v-model="choosenProduct" v-bind:value="product"/>
                     </td>
                 </tr>
             </table>
@@ -105,7 +107,7 @@
         border-color: #344B9D;
         border-radius: 30px;
         color:black;
-        width:100px;
+        width:110px;
         height: 50px;
         margin: 5px;
         font-weight: bold;
@@ -158,11 +160,5 @@
 
     table{
         width: 100%;
-    }
-
-    .productName{
-        cursor: pointer;
-        color: blue;
-        text-decoration: underline;
     }
 </style>
