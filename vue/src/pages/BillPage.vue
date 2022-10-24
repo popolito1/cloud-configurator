@@ -2,7 +2,7 @@
     <div class="container">
         <table>
             <tr>
-                <td width="75px"><img :src="require('@/assets/notFoundElements/gearing.png')" alt="Logo"></td>
+                <td width="75px"><img :src="require('@/assets/logo.png')" alt="Logo"></td>
                 <td width="300px"><div class="title">Facture</div></td>
                 <td></td>
             </tr>
@@ -47,7 +47,7 @@
                     <table width="300px" style="float:right">
                         <tr>
                             <td><strong>Total:</strong></td>    
-                            <td style="text-align:right">{{totalPrice}} EUR</td>
+                            <td style="text-align:right">{{totalPrice.toFixed(2)}} EUR</td>
                         </tr>
                     </table>
                 </td>
