@@ -36,6 +36,7 @@ class Basket {
     graphicCard?: Product = undefined;
     motherboard?: Product = undefined;
     aio?: Product = undefined;
+    case?: Product = undefined;
 }
 
 async function openJsonFile(fileName:string):Promise<Product[]> {
@@ -124,7 +125,9 @@ async function checkCompat(category: string, product: Product, basket: Basket, t
                 if(!basket.processeur.compat.chipset.includes(product.compat.mChipset)) return false;
             }
         }
-        //check size
+        if(basket.case){
+            if(!basket.case.compat.size.includes(product.compat.mSize)) return false;
+        }
     } else if(category == "psu"){
         const psuTDP: number = getTDP(product.compat.TDP);
         if(totalTDP > psuTDP) return false;
@@ -139,6 +142,10 @@ async function checkCompat(category: string, product: Product, basket: Basket, t
             const gpuTDP: number = getTDP(product.compat.TDP);
             const psuTDP: number = getTDP(basket.psu.compat.TDP);
             if(totalTDP + gpuTDP > psuTDP) return false;
+        }
+    } else if(category == "cases"){
+        if(basket.motherboard){
+            if(!product.compat.size.includes(basket.motherboard.compat.mSize)) return false;
         }
     }
     return true;
