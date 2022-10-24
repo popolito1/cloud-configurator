@@ -17,8 +17,8 @@ interface Product {
 
 interface Compat { 
     ddr: string,
-    chipset: string,
-    mChipset: string[],
+    chipset: string[],
+    mChipset: string,
     TDP: string,
     size: string[],
     mSize: string
@@ -36,6 +36,7 @@ class Basket {
     graphicCard?: Product = undefined;
     motherboard?: Product = undefined;
     aio?: Product = undefined;
+    case?: Product = undefined;
 }
 
 async function openJsonFile(fileName:string):Promise<Product[]> {
@@ -102,8 +103,9 @@ async function checkCompat(category: string, product: Product, basket: Basket, t
             if(product.compat.ddr != basket.ram.compat.ddr) return false;
         }
         if(basket.motherboard){
-            if(basket.motherboard.compat.mChipset==undefined) return true;
-            if(!basket.motherboard.compat.mChipset.includes(product.compat.chipset)) return false;
+            if(product.compat.chipset!=undefined){
+                if(!product.compat.chipset.includes(basket.motherboard.compat.mChipset)) return false;
+            }
         }
         if(basket.psu){
             const cpuTDP: number = getTDP(product.compat.TDP);
@@ -119,10 +121,13 @@ async function checkCompat(category: string, product: Product, basket: Basket, t
         }
     } else if(category == "motherboards"){
         if(basket.processeur){
-            if(product.compat.mChipset==undefined) return true;
-            if(!product.compat.mChipset.includes(basket.processeur.compat.chipset)) return false;
+            if(basket.processeur.compat.chipset!=undefined){
+                if(!basket.processeur.compat.chipset.includes(product.compat.mChipset)) return false;
+            }
         }
-        //check size
+        if(basket.case){
+            if(!basket.case.compat.size.includes(product.compat.mSize)) return false;
+        }
     } else if(category == "psu"){
         const psuTDP: number = getTDP(product.compat.TDP);
         if(totalTDP > psuTDP) return false;
@@ -137,6 +142,10 @@ async function checkCompat(category: string, product: Product, basket: Basket, t
             const gpuTDP: number = getTDP(product.compat.TDP);
             const psuTDP: number = getTDP(basket.psu.compat.TDP);
             if(totalTDP + gpuTDP > psuTDP) return false;
+        }
+    } else if(category == "cases"){
+        if(basket.motherboard){
+            if(!product.compat.size.includes(basket.motherboard.compat.mSize)) return false;
         }
     }
     return true;

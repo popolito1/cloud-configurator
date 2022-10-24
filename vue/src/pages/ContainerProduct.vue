@@ -29,8 +29,8 @@
                                     {{product.price}} {{product.currency}}
                                 </div>
                                 <br/>
-                                <button class="btnCompatible" @click="configureWithProduct" v-if="isCompatible">Configure your PC with this product</button>
-                                <button disabled class="btnIncompatible" v-else>Product incompatible with basket</button>
+                                <button class="btnCompatible" @click="configureWithProduct" v-if="isCompatible">Configure ton PC avec ce produit</button>
+                                <button disabled class="btnIncompatible" v-else>Produit incompatible avec les produits dans le panier</button>
                             </div>
                         </th>
                     </tr>
