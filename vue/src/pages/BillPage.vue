@@ -2,7 +2,7 @@
     <div class="container">
         <table>
             <tr>
-                <td width="75px"><img :src="require('@/assets/logo.png')" alt="Logo"></td>
+                <td width="75px"><img :src="require('@/assets/logo2.png')" alt="Logo"></td>
                 <td width="300px"><div class="title">Facture</div></td>
                 <td></td>
             </tr>
@@ -34,7 +34,7 @@
                 <td width="20%" class="column-header">Prix</td>
             </tr>
             <tr v-for="article in basket" :key="article.urlId">
-                <td class="row"><img class="article-picture" :src="article.image"></td>
+                <td class="row"><img class="article-picture" ref="image" :src="article.image"></td>
                 <td class="row">{{article.name}}</td>
                 <td class="row">{{article.extendedName}}</td>
                 <td class="row">{{article.price}}  {{article.currency}}</td>
@@ -69,20 +69,44 @@
                 basket: new Array<Product>()
             }
         },
-        created() {
+        created(){
             const today = new Date();
             this.date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         },
         mounted(){
             this.basket = this.store.getters["getBasket"]
+            this.handleImage();
         },
-        computed: {
+        computed:{
             totalPrice: function() {
                 let price = 0;
                 this.basket.forEach(element => {
                     price += element.price
                 });
                 return price
+            }
+        },
+        methods:{
+            toDataURL(url: string, callback: Function) {
+                //Convert url to base64 image
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function() {
+                    var reader = new FileReader();
+                    reader.onloadend = function() {
+                        callback(reader.result);
+                    }
+                    reader.readAsDataURL(xhr.response);
+                };
+                xhr.open('GET', url);
+                xhr.responseType = 'blob';
+                xhr.send();
+            },
+            handleImage(){
+                this.basket.forEach(element => {
+                    this.toDataURL(element.image, function(dataUrl: string) {
+                        element.image=dataUrl
+                    })
+                });
             }
         }
     });
