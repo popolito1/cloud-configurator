@@ -1,5 +1,6 @@
 <template>
     <nav class="navigation">
+        <img :src="require('@/assets/logo.png')" alt="Logo">
         <ul>
             <li class="elementNav">
                 <router-link to="/">Page d'accueil</router-link>
@@ -89,9 +90,6 @@ nav.navigation ul li.elementNavv a:hover span{
     font-size: large;
 }
 
-
-
-
 nav.navigation ul li.elementNav:hover a{
     color: #F6F6F6;
     background:  rgba(93, 121, 99, 0.0);
@@ -110,7 +108,19 @@ nav.navigation{
     border-radius: 10px;
 }
 .navigation{
+    display: flex;
     width:100%;
+}
+
+img{
+    width: 200px;
+}
+
+ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 </style>
 

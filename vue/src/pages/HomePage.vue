@@ -1,6 +1,5 @@
 <template>
     <div>
-        <img :src="require('@/assets/logo.png')" alt="Logo">
         <HomePageComponent  v-for="componentPage in categories" :key="componentPage" :componentPage="componentPage"/>
     </div>
 </template>
