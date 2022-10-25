@@ -11,11 +11,11 @@
     import SummaryComponent from '../components/SummaryComponent.vue';
 
     export default defineComponent({
-    name: 'ConfiguratorPage',
-    components: {
-        ConfiguratorComponent,
-        SummaryComponent
-    }
+        name: 'ConfiguratorPage',
+        components: {
+            ConfiguratorComponent,
+            SummaryComponent
+        }
     });
 </script>
 

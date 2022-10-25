@@ -22,6 +22,7 @@
   
 <script lang="ts">
     import { defineComponent } from 'vue';
+
     export default defineComponent({
         name: "NotFound",
         data() {
@@ -50,78 +51,82 @@
             this.timer()
         }
     })
-  </script>
+</script>
   
-  <!-- Add "scoped" attribute to limit CSS to this component only -->
-  <style scoped>
-  
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+<style scoped>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
 
-body{
-  overflow:hidden;
-  background-color: #f4f6ff;
-}
+    body{
+        overflow:hidden;
+        background-color: #f4f6ff;
+    }
 
-.container{
-    width:100vw;
-    height:100vh;
-    justify-content: center;
-    align-items: center;
-    font-family: "Poppins", sans-serif;
-    left:6vmin;
-    text-align: center;
-    margin-top: 50px;
-}
-.title-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: #344B9D;
+    .container{
+        width:100vw;
+        height:100vh;
+        justify-content: center;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+        left:6vmin;
+        text-align: center;
+        margin-top: 50px;
+    }
 
-}
-.first-four{
-    left:6vmin;
-    font-size:40vmin;
-}
+    .title-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        color: #344B9D;
 
-.second-four{
-    right:18vmin;
-    z-index: -1;
-    font-size:40vmin;
-}
+    }
 
-img{
-    width:100%;
-}
-.bottom_container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-button {
-    background-color: white;
-    padding: 16px 32px;
-    color: black; 
-    border: 2px solid  #344B9D;
-    font-size: large;
-    margin-top: 15px;
-    cursor: pointer;
-}
-button:hover {
-    background-color:  #344B9D;
-    color: white;
-}
+    .first-four{
+        left:6vmin;
+        font-size:40vmin;
+    }
 
-h1{
-    margin-block: 10px;
-    color:#344B9D;
-}
-p1{
-    color:brown;
-}
-  </style>
+    .second-four{
+        right:18vmin;
+        z-index: -1;
+        font-size:40vmin;
+    }
+
+    img{
+        width:100%;
+    }
+
+    .bottom_container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    button {
+        background-color: white;
+        padding: 16px 32px;
+        color: black; 
+        border: 2px solid  #344B9D;
+        font-size: large;
+        margin-top: 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color:  #344B9D;
+        color: white;
+    }
+
+    h1{
+        margin-block: 10px;
+        color:#344B9D;
+    }
+
+    p1{
+        color:brown;
+    }
+</style>
   

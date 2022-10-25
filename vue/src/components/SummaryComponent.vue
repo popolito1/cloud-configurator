@@ -54,11 +54,11 @@
 
 
 <style scoped>
-
     .container{
         width: 50%;
         margin-left: 60px;
     }
+
     .containerSummary{
         display: flex;
         flex-direction: column;
@@ -67,8 +67,8 @@
         max-height: 500px;
         border-left: solid 10px ;
         border-color: rgba(82, 98, 155, 0.6)  transparent  transparent rgba(52, 75, 157, 0.6);
-        
     }
+
     .buttons{
         background-color: white;
         border : 2px solid;
@@ -80,7 +80,7 @@
         margin: 5px;
         font-weight: bold;
         font-size:medium;
-}
+    }
 
     .buttons:hover{
         background-color: #344B9D;
@@ -91,5 +91,4 @@
     #price{
         font-weight: bold;
     }
-
 </style>

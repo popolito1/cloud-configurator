@@ -40,6 +40,7 @@
     import { defineComponent } from 'vue';
     import { useStore, Product } from '../store'
     import { getProductsCompat } from '../products'
+    
     const categoryNames = {
         processeurs: {fr: "Processeurs", singular: "processeur"},
         aio_coolers: {fr: "Ventirad", singular: "aio_cooler"},
@@ -101,6 +102,7 @@
         display:flex;
         margin:10px;
     }
+
     .myButton{
         background-color: white;
         border : 2px solid;
@@ -123,6 +125,7 @@
     img{
         width:200px;
     }
+
     .container{
         display: flex;
         justify-content: center;
@@ -145,6 +148,7 @@
         flex-direction: row;
         align-items: center;
     }
+
     .searchingBar{
         border: 4px solid #344B9D;
         border-radius: 5px;

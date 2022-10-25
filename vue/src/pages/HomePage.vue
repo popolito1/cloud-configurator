@@ -14,10 +14,10 @@
             HomePageComponent
         },
         data() {
-        return {
-            categories: ["Products", "Configurator"]
-        };
-    },
+            return {
+                categories: ["Products", "Configurator"]
+            };
+        },
     })
 </script>
 

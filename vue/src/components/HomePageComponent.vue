@@ -22,6 +22,7 @@
 
 <script lang="ts">
     import { defineComponent } from 'vue';
+
     export default defineComponent({
         name: 'HomePageComponent',
         props:{
@@ -68,6 +69,7 @@
         padding:30px;
     
     }
+
     title{
         display: flex;
         flex-direction: column;
@@ -78,6 +80,7 @@
         color:#344B9D;
     ;
     }
+
     h1{
         font-size: 50px;
     }
@@ -95,21 +98,21 @@
         border: 2px solid white;
         cursor: pointer;
     }
+
     .subtitle{
         display : flex;
         flex-wrap: wrap;
         margin-top:-45px;
         margin-bottom:10px;
     }
+
     .img{
         display:flex;
         justify-content: center;
         align-items: center;
-
     }
+
     img{
         width: 250px;
     }
-
-
 </style>

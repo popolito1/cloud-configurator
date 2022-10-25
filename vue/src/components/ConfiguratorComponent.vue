@@ -36,7 +36,9 @@
                 let product =this.store.getters["getBasket"].filter((el: Product) => el.category == category)
                 if(product.length>0){
                     return product[0]
-                }else{return null}
+                }else{ 
+                    return null 
+                }
             }
         }
     });
