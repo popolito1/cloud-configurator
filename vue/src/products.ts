@@ -18,23 +18,23 @@ function basketData(basket: Product[]){
 }
 
 export async function getProduct(category: string | string[], urlId: string | string[]):Promise<Product> {
-  const res = await jsonRequest("http://localhost:8081/API/product", JSON.stringify({category: category, urlId: urlId}));
+  const res = await jsonRequest("http://localhost:31380/API/product", JSON.stringify({category: category, urlId: urlId}));
   return await res.json();
 }
 
 export async function getProducts(category: string | string[]):Promise<Product[]> {
-  const res = await jsonRequest("http://localhost:8081/API/products", JSON.stringify({category: category}));
+  const res = await jsonRequest("http://localhost:31380/API/products", JSON.stringify({category: category}));
   return await res.json();
 }
 
 export async function getProductsCompat(category: string, basket: Product[]):Promise<Product[]> {
   const list = basketData(basket)
-  const res = await jsonRequest("http://localhost:8081/API/productsCompat", JSON.stringify({basket: list, category: category}));
+  const res = await jsonRequest("http://localhost:31380/API/productsCompat", JSON.stringify({basket: list, category: category}));
   return await res.json();
 }
 
 export async function checkCompat(category: string, urlId: string, basket: Product[]):Promise<boolean> {
   const list = basketData(basket)
-  const res = await jsonRequest("http://localhost:8081/API/productCompat", JSON.stringify({basket: list, urlId: urlId, category: category}));
+  const res = await jsonRequest("http://localhost:31380/API/productCompat", JSON.stringify({basket: list, urlId: urlId, category: category}));
   return await res.json();
 }

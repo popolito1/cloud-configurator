@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configuratorservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configuratorservice
+  template:
+    metadata:
+      labels:
+        app: configuratorservice
+    spec:
+      containers:
+        - image: monicapauline/configurator-service-image
+          imagePullPolicy: IfNotPresent
+          name: configuratorservice
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: configuratorservice
+spec:
+  ports:
+    - nodePort: 31280
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    app: configuratorservice
+  type: NodePort
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: configuratorservice
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - cloud-configurator-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            port:
+              number: 8081
+            host: configuratorservice.default.svc.cluster.local
+  
