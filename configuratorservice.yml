@@ -1,7 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: services
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: configuratorservice
+  namespace: services
 spec:
   replicas: 1
   selector:
@@ -22,6 +28,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: configuratorservice
+  namespace: services
 spec:
   ports:
     - nodePort: 31280
@@ -42,7 +49,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - cloud-configurator-gateway
+    - services/cloud-configurator-gateway
   http:
     - match:
         - uri:
@@ -53,5 +60,5 @@ spec:
         - destination:
             port:
               number: 8081
-            host: configuratorservice.default.svc.cluster.local
+            host: configuratorservice.services.svc.cluster.local
   
