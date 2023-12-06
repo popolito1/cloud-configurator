@@ -49,7 +49,7 @@ spec:
   hosts:
     - "*"
   gateways:
-    - services/cloud-configurator-gateway
+    - cloud-configurator-gateway
   http:
     - match:
         - uri:
