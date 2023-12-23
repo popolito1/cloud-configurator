@@ -1,21 +1,37 @@
-/* import { AppDataSource } from "./data-source"
-import { Products } from "./entity/Products"
+import { AppDataSource } from "./data-source"
+import * as express from "express"
+import { Request, Response } from "express"
 
-AppDataSource.initialize().then(async () => {
 
-    console.log("Inserting a new user into the database...")
-    const user = new Products()
-    user.firstName = "Timber"
-    user.lastName = "Saw"
-    user.age = 25
-    await AppDataSource.manager.save(user)
-    console.log("Saved a new user with id: " + user.id)
+require("dotenv").config()
+const cors = require("cors")
 
-    console.log("Loading users from the database...")
-    const users = await AppDataSource.manager.find(User)
-    console.log("Loaded users: ", users)
+var corsOptions = {
+  origin: process.env.ORIGIN
+};
 
-    console.log("Here you can setup and run express / fastify / any other framework.")
+// establish database connection
+AppDataSource
+    .initialize()
+    .then(() => {
+        console.log("Data Source has been initialized!")
+    })
+    .catch((err) => {
+        console.error("Error during Data Source initialization:", err)
+    })
 
-}).catch(error => console.log(error))
- */
+// create and setup express app
+const app= express()
+const port = process.env.PORT;
+app.use(cors(corsOptions));
+app.use(express.json())
+app.use(express.urlencoded({extended:true}));
+
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('DB Server');
+  });
+// start express server
+app.listen(port, ()=> {
+    console.log(`Server is running at http://localhost:${port}`)
+})

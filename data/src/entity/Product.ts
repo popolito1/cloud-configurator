@@ -35,7 +35,7 @@ export class Product {
     @Column()
     category: string
 
-    @Column()
+    @Column(type => Object)
     fiche: Object
 
     @OneToOne(type => Compat)
