@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: services
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dataservice
+  namespace: services
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dataservice
+  template:
+    metadata:
+      labels:
+        app: dataservice
+    spec:
+      containers:
+        - image: monicapauline/data-service-image
+          imagePullPolicy: IfNotPresent
+          name: dataservice
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dataservice
+  namespace: services
+spec:
+  ports:
+    - nodePort: 31282
+      port: 8082
+      protocol: TCP
+      targetPort: 8082
+  selector:
+    app: dataservice
+  type: NodePort
