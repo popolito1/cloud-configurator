@@ -19,3 +19,25 @@ spec:
     app: dbservice
   type: NodePort
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dbservice
+  namespace: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dbservice
+  template:
+    metadata:
+      labels:
+        app: dbservice
+    spec:
+      containers:
+        - image: monicapauline/db-service-image
+          imagePullPolicy: IfNotPresent
+          name: dbservice
+      restartPolicy: Always
+---
