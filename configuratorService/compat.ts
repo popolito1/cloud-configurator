@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-const fs = require("fs")
+import fetch from 'node-fetch';
 
 interface Product {
     name: string,
@@ -39,23 +39,24 @@ class Basket {
     case?: Product = undefined;
 }
 
-async function openJsonFile(fileName:string):Promise<Product[]> {
-    const raw: string = await fs.readFileSync(`./fiche_techniques/${fileName}.json`);
-    return JSON.parse(raw);
+async function getProductFromDB(category: string, urlId: string): Promise<Product> {
+    const r = await fetch(`localhost:8082/product/${category}/${urlId}`)
+    return r.json() as Promise<Product>
 }
 
-async function getProductFromFile(category: string, urlId: string):Promise<Product> {
-    const data = await openJsonFile(category);
-    return data.filter(el => el.urlId == urlId)[0];
+async function getProductsCategory(category: string): Promise<Product[]> {
+    const r = await fetch(`localhost:8082/product/${category}`)
+    return r.json() as Promise<Product[]>
 }
 
 export async function getProducts(req: Request, res: Response){
-    const data = await openJsonFile(req.body.category);
+    const r = await fetch(`localhost:8082/product/${req.body.category}`)
+    const data = await r.json()
     res.status(200).json(data);
 }
 
 export async function getProduct(req: Request, res: Response){
-    const product = await getProductFromFile(req.body.category, req.body.urlId);
+    const product = await getProductFromDB(req.body.category, req.body.urlId);
     res.status(200).json(product);
 }
 
@@ -72,7 +73,7 @@ async function getBasket(rawBasket: BasketProduct[]):Promise<Basket> {
     //rebuild the basket from category and urlId into Product Objects
     const basket: Basket = new Basket;
     for(const product of rawBasket){
-        const temp = await getProductFromFile(categoryType[product.category as keyof typeof categoryType].plural, product.urlId);
+        const temp = await getProductFromDB(categoryType[product.category as keyof typeof categoryType].plural, product.urlId);
         const key: keyof Basket = product.category as keyof Basket;
         basket[key] = temp;
     }
@@ -155,7 +156,7 @@ export async function getProductsCompat(req: Request, res: Response){
     const category = req.body.category;
     const basket = await getBasket(req.body.basket);
     const totalTDP = getTotalTDP(basket);
-    const data = await openJsonFile(category);
+    const data = await getProductsCategory(category);
     const products: Product[] = [];
     for(const product of data){
         if(await checkCompat(category, product, basket, totalTDP)){
@@ -170,7 +171,7 @@ export async function getProductCompat(req: Request, res: Response){
     const urlId = req.body.urlId
     const basket = await getBasket(req.body.basket);
     const totalTDP = getTotalTDP(basket);
-    const product = await getProductFromFile(category, urlId);
+    const product = await getProductFromDB(category, urlId);
 
     const compatible = await checkCompat(category, product, basket, totalTDP);
 
