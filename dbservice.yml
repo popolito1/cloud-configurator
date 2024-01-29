@@ -39,5 +39,7 @@ spec:
         - image: monicapauline/db-service-image
           imagePullPolicy: IfNotPresent
           name: dbservice
+          env:
+            - name: DATASERVICE_HOST
+              value: "dataservice.services"
       restartPolicy: Always
----
