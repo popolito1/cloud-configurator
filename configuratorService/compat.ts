@@ -40,17 +40,17 @@ class Basket {
 }
 
 async function getProductFromDB(category: string, urlId: string): Promise<Product> {
-    const r = await fetch(`http://dataservice:8082/product/${category}/${urlId}`)
+    const r = await fetch(`http://dbservice:8082/product/${category}/${urlId}`)
     return r.json() as Promise<Product>
 }
 
 async function getProductsCategory(category: string): Promise<Product[]> {
-    const r = await fetch(`http://dataservice:8082/product/${category}`)
+    const r = await fetch(`http://dbservice:8082/product/${category}`)
     return r.json() as Promise<Product[]>
 }
 
 export async function getProducts(req: Request, res: Response){
-    const r = await fetch(`http://dataservice:8082/product/${req.body.category}`)
+    const r = await fetch(`http://dbservice:8082/product/${req.body.category}`)
     const data = await r.json()
     res.status(200).json(data);
 }
