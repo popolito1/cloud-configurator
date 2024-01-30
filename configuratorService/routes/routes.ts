@@ -1,5 +1,5 @@
 import { Express, Request, Response } from 'express'
-import { getProductCompat, getProductsCompat, getProduct, getProducts } from '../compat'
+import { getProductCompat, getProductsCompat, getProduct, getProducts } from '../compat.js'
 
 
 export function route(app: Express){
